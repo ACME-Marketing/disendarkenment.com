@@ -28,20 +28,28 @@ try {
 ---
 
 <BaseLayout title="Disendarkenment - Blog">
-	<h1>Welcome to Disendarkenment Blog</h1>
+	<header>
+		<h1>Welcome to Disendarkenment Blog</h1>
+	</header>
 
-	{posts.length > 0 ? (
-		<ul>
-			{posts.map((post) => (
-				<li>
-					<a href={post.uri}>{post.title}</a>
-					{post.categories && post.categories.nodes.length > 0 && (
-						<span> ({post.categories.nodes.map(cat => cat.name).join(', ')})</span>
-					)}
-				</li>
-			))}
-		</ul>
-	) : (
-		<p>No posts found. Please add some posts in your WordPress CMS with the category "Disendarkenment Journeys".</p>
-	)}
+	<main class="container">
+		{posts.length > 0 ? (
+			<ul>
+				{posts.map((post) => (
+					<li>
+						<a href={post.uri}>{post.title}</a>
+						{post.categories && post.categories.nodes.length > 0 && (
+							<span> ({post.categories.nodes.map(cat => cat.name).join(', ')})</span>
+						)}
+					</li>
+				))}
+			</ul>
+		) : (
+			<p>No posts found. Please add some posts in your WordPress CMS with the category "Disendarkenment Journeys" or "all".</p>
+		)}
+	</main>
+
+	<footer>
+		<p>&copy; {new Date().getFullYear()} Disendarkenment. All rights reserved.</p>
+	</footer>
 </BaseLayout>
