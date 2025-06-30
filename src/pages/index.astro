@@ -3,7 +3,7 @@ import { graphQLClient, gql } from '../lib/graphql';
 
 const GET_DISENDARKENMENT_POSTS = gql`
   query GetDisendarkenmentPosts {
-    posts(where: { categoryName: "Disendarkenment Journeys" }) {
+    posts(where: { categoryNameIn: ["disendarkenment", "all"] }) {
       nodes {
         title
         uri
