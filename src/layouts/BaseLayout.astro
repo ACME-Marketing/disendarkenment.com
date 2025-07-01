@@ -18,7 +18,7 @@ const { title } = Astro.props;
         <title>{title}</title>
     </head>
     <body class="font-sans text-gray-800 bg-gray-100">
-        <header class="bg-gray-800 text-white py-4 shadow-md">
+        <header class="bg-blue-800 text-white py-4 shadow-md">
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
                 <h1 class="text-3xl font-extrabold mb-2 md:mb-0">
                     <a href="/" class="hover:text-red-400">disendarkenment.com</a>
@@ -33,7 +33,9 @@ const { title } = Astro.props;
                 </nav>
             </div>
         </header>
-        <slot />
+        <main class="container mx-auto px-4 py-12">
+            <slot />
+        </main>
         <footer class="bg-gray-800 text-white py-8 mt-12">
             <div class="container mx-auto px-4 text-center">
                 <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 mb-4">
