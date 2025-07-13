@@ -1,6 +1,6 @@
-const CACHE_NAME = 'disendarkenment-v1';
-const STATIC_CACHE = 'disendarkenment-static-v1';
-const DYNAMIC_CACHE = 'disendarkenment-dynamic-v1';
+const CACHE_NAME = 'disendarkenment-v2';
+const STATIC_CACHE = 'disendarkenment-static-v2';
+const DYNAMIC_CACHE = 'disendarkenment-dynamic-v2';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
@@ -83,10 +83,10 @@ self.addEventListener('fetch', (event) => {
         }
 
         // Not in cache, fetch from network
-        return fetch(request)
+        return fetch(request, { redirect: 'follow' })
           .then((networkResponse) => {
-            // Don't cache non-successful responses
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
+            // Don't cache redirect responses or non-successful responses
+            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic' || networkResponse.redirected) {
               return networkResponse;
             }
 
