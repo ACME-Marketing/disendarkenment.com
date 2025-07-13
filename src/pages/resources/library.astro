@@ -1,0 +1,641 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Educational Library - Disendarkenment" description="Comprehensive educational library with research articles, safety guidelines, and best practices for psychedelic therapy and healing.">
+	<!-- Hero Section -->
+	<section class="bg-gradient-to-br from-green-900 via-teal-900 to-blue-900 text-white py-16">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6">Educational Library</h1>
+				<p class="text-xl text-green-100 mb-8">
+					Research-based articles, scientific studies, and educational content about psychedelic therapy and healing
+				</p>
+				<nav class="text-green-200">
+					<a href="/resources" class="hover:text-white transition duration-300">Resources</a>
+					<span class="mx-2">→</span>
+					<span>Library</span>
+				</nav>
+			</div>
+		</div>
+	</section>
+
+	<!-- Library Categories -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Knowledge Categories</h2>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+					Explore our curated collection of educational materials covering all aspects of psychedelic therapy and healing
+				</p>
+			</div>
+			
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+				<div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-8 hover:shadow-lg transition duration-300">
+					<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Research & Science</h3>
+					<p class="text-gray-600 mb-6 text-center">
+						Latest scientific research, clinical studies, and evidence-based findings in psychedelic medicine.
+					</p>
+					<div class="space-y-2 mb-6">
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Clinical trial results
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Neuroscience insights
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Therapeutic mechanisms
+						</div>
+					</div>
+					<a href="#research" class="block w-full text-center bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+						Explore Research
+					</a>
+				</div>
+
+				<div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-8 hover:shadow-lg transition duration-300">
+					<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Safety & Protocols</h3>
+					<p class="text-gray-600 mb-6 text-center">
+						Comprehensive safety guidelines, risk mitigation strategies, and established protocols for safe practice.
+					</p>
+					<div class="space-y-2 mb-6">
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Contraindications guide
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Emergency procedures
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Best practice standards
+						</div>
+					</div>
+					<a href="#safety" class="block w-full text-center bg-green-600 hover:bg-green-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+						View Safety Guidelines
+					</a>
+				</div>
+
+				<div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg p-8 hover:shadow-lg transition duration-300">
+					<div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6">
+						<svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold text-gray-900 mb-4 text-center">Best Practices</h3>
+					<p class="text-gray-600 mb-6 text-center">
+						Professional guidelines, therapeutic approaches, and established best practices in psychedelic facilitation.
+					</p>
+					<div class="space-y-2 mb-6">
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Facilitation techniques
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Integration methods
+						</div>
+						<div class="flex items-center text-sm text-gray-600">
+							<svg class="w-4 h-4 text-green-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Professional standards
+						</div>
+					</div>
+					<a href="#practices" class="block w-full text-center bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+						Learn Best Practices
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Research Articles Section -->
+	<section id="research" class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="max-w-6xl mx-auto">
+				<h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Research & Scientific Studies</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Psilocybin for Treatment-Resistant Depression</h3>
+								<p class="text-sm text-gray-500">Clinical Research • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Comprehensive analysis of psilocybin-assisted therapy outcomes in patients with treatment-resistant depression, showing significant improvements in mood and quality of life.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-blue-600 font-medium">Peer-reviewed study</span>
+							<button class="text-blue-600 hover:text-blue-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Neuroplasticity and Psychedelic Therapy</h3>
+								<p class="text-sm text-gray-500">Neuroscience Research • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Investigation into how psilocybin promotes neuroplasticity and creates lasting changes in brain connectivity patterns associated with improved mental health outcomes.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-indigo-600 font-medium">Neuroscience study</span>
+							<button class="text-indigo-600 hover:text-indigo-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">PTSD and Psychedelic-Assisted Therapy</h3>
+								<p class="text-sm text-gray-500">Clinical Trial • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Multi-site clinical trial examining the efficacy of psilocybin-assisted therapy for post-traumatic stress disorder, with promising results for symptom reduction.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-purple-600 font-medium">Phase II trial</span>
+							<button class="text-purple-600 hover:text-purple-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Integration Practices and Long-term Outcomes</h3>
+								<p class="text-sm text-gray-500">Longitudinal Study • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Long-term follow-up study examining the relationship between integration practices and sustained therapeutic benefits from psychedelic experiences.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-green-600 font-medium">12-month follow-up</span>
+							<button class="text-green-600 hover:text-green-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Set and Setting: Environmental Factors</h3>
+								<p class="text-sm text-gray-500">Research Review • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Comprehensive review of how environmental and psychological factors influence psychedelic therapy outcomes and safety profiles.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-yellow-600 font-medium">Meta-analysis</span>
+							<button class="text-yellow-600 hover:text-yellow-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+
+					<article class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition duration-300">
+						<div class="flex items-center mb-4">
+							<div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+								<svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 7.172V5L8 4z"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-lg font-semibold text-gray-900">Facilitator Training and Competency</h3>
+								<p class="text-sm text-gray-500">Professional Development • 2023</p>
+							</div>
+						</div>
+						<p class="text-gray-600 mb-4">
+							Analysis of training requirements, competency standards, and professional development needs for psychedelic therapy facilitators.
+						</p>
+						<div class="flex items-center justify-between">
+							<span class="text-sm text-red-600 font-medium">Professional standards</span>
+							<button class="text-red-600 hover:text-red-800 font-medium text-sm">Read More →</button>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Safety Guidelines Section -->
+	<section id="safety" class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Safety Guidelines & Protocols</h2>
+				
+				<div class="space-y-8">
+					<div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+						<div class="flex items-start">
+							<div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+								<svg class="w-4 h-4 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-3">Absolute Contraindications</h3>
+								<p class="text-gray-700 mb-4">
+									These conditions represent absolute contraindications for psychedelic therapy and require careful screening:
+								</p>
+								<ul class="space-y-2 text-gray-700">
+									<li>• Personal or family history of psychotic disorders</li>
+									<li>• Current use of certain medications (MAOIs, lithium, tramadol)</li>
+									<li>• Severe cardiovascular conditions</li>
+									<li>• Active substance abuse disorders</li>
+									<li>• Severe personality disorders with poor reality testing</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded-lg">
+						<div class="flex items-start">
+							<div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+								<svg class="w-4 h-4 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-3">Relative Contraindications</h3>
+								<p class="text-gray-700 mb-4">
+									These conditions require careful evaluation and may require additional precautions:
+								</p>
+								<ul class="space-y-2 text-gray-700">
+									<li>• History of anxiety or panic disorders</li>
+									<li>• Recent major life stressors or trauma</li>
+									<li>• Pregnancy or breastfeeding</li>
+									<li>• Certain medical conditions requiring monitoring</li>
+									<li>• Lack of adequate support system</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+						<div class="flex items-start">
+							<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+								<svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-3">Emergency Protocols</h3>
+								<p class="text-gray-700 mb-4">
+									Established procedures for managing challenging situations during sessions:
+								</p>
+								<ul class="space-y-2 text-gray-700">
+									<li>• Immediate access to medical support</li>
+techniques for challenging experiences</li>
+									<li>• Crisis intervention protocols</li>
+									<li>• Post-session support procedures</li>
+									<li>• Documentation and reporting requirements</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+						<div class="flex items-start">
+							<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+								<svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+								</svg>
+							</div>
+							<div>
+								<h3 class="text-xl font-semibold text-gray-900 mb-3">Screening & Assessment</h3>
+								<p class="text-gray-700 mb-4">
+									Comprehensive evaluation process to ensure participant safety and readiness:
+								</p>
+								<ul class="space-y-2 text-gray-700">
+									<li>• Medical history and physical examination</li>
+									<li>• Psychological assessment and mental health screening</li>
+									<li>• Medication review and drug interaction analysis</li>
+									<li>• Risk assessment and safety planning</li>
+									<li>• Informed consent and expectation setting</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Best Practices Section -->
+	<section id="practices" class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="max-w-6xl mx-auto">
+				<h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Professional Best Practices</h2>
+				
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+					<div>
+						<h3 class="text-2xl font-semibold text-gray-900 mb-6">Facilitation Excellence</h3>
+						<div class="space-y-6">
+							<div class="bg-white rounded-lg p-6 shadow-lg">
+								<h4 class="text-lg font-semibold text-gray-900 mb-3">Pre-Session Preparation</h4>
+								<ul class="space-y-2 text-gray-600">
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Thorough intake and assessment process
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Intention setting and expectation alignment
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Environment optimization and safety checks
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Emergency protocol review and preparation
+									</li>
+								</ul>
+							</div>
+
+							<div class="bg-white rounded-lg p-6 shadow-lg">
+								<h4 class="text-lg font-semibold text-gray-900 mb-3">During Session Support</h4>
+								<ul class="space-y-2 text-gray-600">
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Non-directive presence and holding space
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Skillful intervention when needed
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Continuous safety monitoring
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-blue-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Documentation and observation notes
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<h3 class="text-2xl font-semibold text-gray-900 mb-6">Integration Support</h3>
+						<div class="space-y-6">
+							<div class="bg-white rounded-lg p-6 shadow-lg">
+								<h4 class="text-lg font-semibold text-gray-900 mb-3">Immediate Post-Session</h4>
+								<ul class="space-y-2 text-gray-600">
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Gentle re-orientation and grounding
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Initial experience processing
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Safety assessment and aftercare planning
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-purple-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Resource provision and next steps
+									</li>
+								</ul>
+							</div>
+
+							<div class="bg-white rounded-lg p-6 shadow-lg">
+								<h4 class="text-lg font-semibold text-gray-900 mb-3">Long-term Integration</h4>
+								<ul class="space-y-2 text-gray-600">
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Structured follow-up sessions
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Meaning-making and insight development
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Behavioral change support
+									</li>
+									<li class="flex items-start">
+										<svg class="w-5 h-5 text-indigo-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+											<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+										</svg>
+										Community and peer support facilitation
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Professional Standards Section -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Professional Standards & Ethics</h2>
+				
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+					<div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-8">
+						<h3 class="text-xl font-semibold text-gray-900 mb-4">Ethical Guidelines</h3>
+						<ul class="space-y-3 text-gray-700">
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Informed consent and transparency
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Confidentiality and privacy protection
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Professional boundaries and dual relationships
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Cultural sensitivity and inclusivity
+							</li>
+						</ul>
+					</div>
+
+					<div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg p-8">
+						<h3 class="text-xl font-semibold text-gray-900 mb-4">Training Requirements</h3>
+						<ul class="space-y-3 text-gray-700">
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Comprehensive facilitator certification
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Ongoing supervision and mentorship
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Continuing education requirements
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								Personal experience and self-work
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Newsletter Signup -->
+	<section class="py-16 bg-gradient-to-br from-green-900 via-teal-900 to-blue-900 text-white">
+		<div class="container mx-auto px-4">
+			<div class="max-w-2xl mx-auto text-center">
+				<h2 class="text-3xl font-bold mb-4">Stay Updated on Latest Research</h2>
+				<p class="text-xl text-green-100 mb-8">
+					Get notified when new research articles and educational resources are added to our library
+				</p>
+				<form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+					<input 
+						type="email" 
+						placeholder="Enter your email" 
+						class="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-green-400"
+						required
+					>
+					<button 
+						type="submit" 
+						class="bg-green-600 hover:bg-green-500 px-6 py-3 rounded-lg font-semibold transition duration-300"
+					>
+						Subscribe
+					</button>
+				</form>
+				<p class="text-sm text-green-200 mt-4">
+					We respect your privacy. Unsubscribe at any time.
+				</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<script>
+	// Newsletter signup functionality
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.querySelector('form');
+		if (form) {
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+				const email = (this.querySelector('input[type="email"]') as HTMLInputElement)?.value;
+				if (email) {
+					// Here you would typically send the email to your backend
+					alert('Thank you for subscribing! You will receive updates on new research and resources.');
+					(this.querySelector('input[type="email"]') as HTMLInputElement).value = '';
+				}
+			});
+		}
+	});
+</script>
+									<li>• De-escalation

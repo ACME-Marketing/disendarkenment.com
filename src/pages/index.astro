@@ -30,65 +30,301 @@ const GET_POSTS = gql`
   }
 `;
 
-let posts = [];
+interface Post {
+  title: string;
+  uri: string;
+  content: string;
+  featuredImage?: {
+    node: {
+      sourceUrl: string;
+      altText?: string;
+      mediaDetails: {
+        width: number;
+        height: number;
+      };
+    };
+  };
+  tags?: {
+    nodes: Array<{
+      name: string;
+      slug: string;
+    }>;
+  };
+}
+
+let posts: Post[] = [];
 try {
-  const data = await graphQLClient.request(GET_POSTS);
+  const data: any = await graphQLClient.request(GET_POSTS);
   posts = data.posts.nodes;
 } catch (error) {
   console.error("Error fetching posts:", error);
 }
 ---
 
-<BaseLayout title="Disendarkenment">
-	<header class="bg-blue-800 text-white py-4 shadow-md">
-		<div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
-			<h1 class="text-3xl font-extrabold mb-2 md:mb-0"><a href="/" class="hover:text-red-400">Disendarkenment</a></h1>
-			<nav>
-				<ul class="flex flex-wrap justify-center space-x-4 text-lg">
-					<li><a href="#" class="hover:text-red-400 transition duration-300">Home</a></li>
-					<li><a href="#" class="hover:text-red-400 transition duration-300">Services</a></li>
-					<li><a href="#" class="hover:text-red-400 transition duration-300">Blog</a></li>
-					<li><a href="#" class="hover:text-red-400 transition duration-300">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-	</header>
-
-	<section class="relative bg-gradient-to-r from-red-600 via-red-700 to-blue-800 text-white py-24 text-center overflow-hidden shadow-lg">
-		<div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('/hero-background.svg');"></div>
+<BaseLayout title="Disendarkenment - Licensed Psychedelic Journey Facilitation" description="Professional psilocybin therapy and psychedelic journey facilitation in Oregon and Colorado. Licensed facilitator offering preparation, guided sessions, integration, and ongoing support.">
+	<!-- Hero Section -->
+	<section class="relative bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white py-20 lg:py-32 overflow-hidden">
+		<div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('/hero-background.svg');"></div>
 		<div class="container mx-auto relative z-10 px-4">
-			<h2 class="text-6xl font-extrabold mb-6 leading-tight drop-shadow-lg">Disendarkenment</h2>
-			<p class="text-2xl mb-10 font-light">Illuminating Paths to Clarity</p>
-			<a href="#" class="bg-white text-blue-800 hover:bg-red-200 font-bold py-4 px-10 rounded-full text-xl uppercase tracking-wide transition duration-300 transform hover:scale-105 inline-block">Learn More</a>
+			<div class="max-w-4xl mx-auto text-center">
+				<h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+					Professional Psychedelic<br />
+					<span class="text-purple-300">Journey Facilitation</span>
+				</h1>
+				<p class="text-xl md:text-2xl mb-8 text-purple-100 font-light">
+					Licensed psilocybin therapy in Oregon & Colorado with a non-evaluative, guide-based approach
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+					<a href="/get-started" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 transform hover:scale-105">
+						Schedule Consultation
+					</a>
+					<a href="/services" class="border-2 border-purple-300 text-purple-300 hover:bg-purple-300 hover:text-purple-900 font-semibold py-4 px-8 rounded-lg text-lg transition duration-300">
+						Explore Services
+					</a>
+				</div>
+				
+				<!-- Trust Signals -->
+				<div class="flex flex-wrap justify-center items-center gap-6 text-sm text-purple-200">
+					<div class="flex items-center gap-2">
+						<svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+						<span>Licensed in Oregon & Colorado</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+						<span>Professional Training & Certification</span>
+					</div>
+					<div class="flex items-center gap-2">
+						<svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+						</svg>
+						<span>Safe, Legal, Supportive Environment</span>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 
-	<main class="container mx-auto px-4 py-8">
-		<h2 class="text-3xl font-bold text-center mb-8">Latest Insights</h2>
-		{posts.length > 0 ? (
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-				{posts.map((post) => (
-					<div class="bg-white rounded-lg shadow-lg overflow-hidden">
-						{post.featuredImage && post.featuredImage.node && (
-							<img src={post.featuredImage.node.sourceUrl} alt={post.featuredImage.node.altText || post.title} width={post.featuredImage.node.mediaDetails.width} height={post.featuredImage.node.mediaDetails.height} class="w-full h-48 object-cover" />
-						)}
-						<div class="p-6">
-							<h3 class="text-xl font-semibold mb-2"><a href={`/posts/${post.uri}`}>{post.title}</a></h3>
-							{post.tags && post.tags.nodes.length > 0 && (
-								<p class="text-gray-600 text-sm mb-4">Tags: {post.tags.nodes.map(tag => tag.name).join(', ')}</p>
-							)}
-							<div class="text-gray-700 mb-4" set:html={post.content.substring(0, 150) + '...'} />
-							<a href={`/posts/${post.uri}`} class="text-blue-600 hover:underline">Read More</a>
-						</div>
-					</div>
-				))}
+	<!-- Services Overview -->
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Complete Journey Support</h2>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+					Our comprehensive approach guides you through every phase of your psychedelic journey with professional care and expertise.
+				</p>
 			</div>
-		) : (
-			<p class="text-center text-gray-600 text-xl py-10">No posts found. Please add some posts in your WordPress CMS with the tag "disendarkenment" or "all".</p>
-		)}
-	</main>
+			
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
+					<div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-3">Preparation</h3>
+					<p class="text-gray-600 mb-4">Comprehensive readiness assessment, intention setting, and mental preparation for your journey.</p>
+					<a href="/services/preparation" class="text-purple-600 hover:text-purple-800 font-medium">Learn More →</a>
+				</div>
+				
+				<div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
+					<div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-3">Facilitation</h3>
+					<p class="text-gray-600 mb-4">Professional guidance during your psilocybin experience in a safe, supportive environment.</p>
+					<a href="/services/facilitation" class="text-purple-600 hover:text-purple-800 font-medium">Learn More →</a>
+				</div>
+				
+				<div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
+					<div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-3">Integration</h3>
+					<p class="text-gray-600 mb-4">Post-journey support to help you process insights and integrate learnings into daily life.</p>
+					<a href="/services/integration" class="text-purple-600 hover:text-purple-800 font-medium">Learn More →</a>
+				</div>
+				
+				<div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition duration-300">
+					<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3.5M3 16.5h18"></path>
+						</svg>
+					</div>
+					<h3 class="text-xl font-semibold mb-3">Beyond</h3>
+					<p class="text-gray-600 mb-4">Ongoing support and advanced practices for continued growth and transformation.</p>
+					<a href="/services/beyond" class="text-purple-600 hover:text-purple-800 font-medium">Learn More →</a>
+				</div>
+			</div>
+		</div>
+	</section>
 
-	<footer>
-		<p>&copy; {new Date().getFullYear()} ACME Marketing. All rights reserved.</p>
-	</footer>
+	<!-- Journey Packages -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Journey Packages</h2>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto">
+					Choose the level of support that best fits your needs and experience level.
+				</p>
+			</div>
+			
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+				<div class="border-2 border-gray-200 rounded-lg p-8 hover:border-purple-300 transition duration-300">
+					<h3 class="text-2xl font-bold mb-4">Essential</h3>
+					<p class="text-gray-600 mb-6">Core facilitation with basic preparation and integration support.</p>
+					<ul class="space-y-3 mb-8">
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Pre-journey consultation
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Guided psilocybin session
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Basic integration session
+						</li>
+					</ul>
+					<a href="/get-started" class="block w-full text-center bg-gray-100 hover:bg-purple-100 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-300">
+						Learn More
+					</a>
+				</div>
+				
+				<div class="border-2 border-purple-500 rounded-lg p-8 relative bg-purple-50">
+					<div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white px-4 py-1 rounded-full text-sm font-medium">
+						Most Popular
+					</div>
+					<h3 class="text-2xl font-bold mb-4">Comprehensive</h3>
+					<p class="text-gray-600 mb-6">Complete journey support with extended preparation and integration.</p>
+					<ul class="space-y-3 mb-8">
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Multiple preparation sessions
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Guided psilocybin session
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Extended integration support
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Follow-up sessions
+						</li>
+					</ul>
+					<a href="/get-started" class="block w-full text-center bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300">
+						Get Started
+					</a>
+				</div>
+				
+				<div class="border-2 border-gray-200 rounded-lg p-8 hover:border-purple-300 transition duration-300">
+					<h3 class="text-2xl font-bold mb-4">Executive</h3>
+					<p class="text-gray-600 mb-6">Premium experience with personalized support and flexible scheduling.</p>
+					<ul class="space-y-3 mb-8">
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Personalized preparation program
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Premium facilitation experience
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Ongoing integration coaching
+						</li>
+						<li class="flex items-center">
+							<svg class="w-5 h-5 text-green-500 mr-3" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+							</svg>
+							Priority scheduling
+						</li>
+					</ul>
+					<a href="/get-started" class="block w-full text-center bg-gray-100 hover:bg-purple-100 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-300">
+						Learn More
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Latest Insights -->
+	<section class="py-16 bg-gray-50">
+		<div class="container mx-auto px-4">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Latest Insights</h2>
+				<p class="text-xl text-gray-600">
+					Explore articles, research, and guidance on psychedelic therapy and personal transformation.
+				</p>
+			</div>
+			
+			{posts.length > 0 ? (
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{posts.map((post) => (
+						<article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+							{post.featuredImage && post.featuredImage.node && (
+								<img src={post.featuredImage.node.sourceUrl} alt={post.featuredImage.node.altText || post.title} width={post.featuredImage.node.mediaDetails.width} height={post.featuredImage.node.mediaDetails.height} class="w-full h-48 object-cover" />
+							)}
+							<div class="p-6">
+								<h3 class="text-xl font-semibold mb-3 text-gray-900">
+									<a href={`/posts${post.uri}`} class="hover:text-purple-600 transition duration-300">{post.title}</a>
+								</h3>
+								{post.tags && post.tags.nodes.length > 0 && (
+									<div class="flex flex-wrap gap-2 mb-4">
+										{post.tags.nodes.map(tag => (
+											<span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">{tag.name}</span>
+										))}
+									</div>
+								)}
+								<div class="text-gray-600 mb-4 line-clamp-3" set:html={post.content.substring(0, 150) + '...'} />
+								<a href={`/posts${post.uri}`} class="text-purple-600 hover:text-purple-800 font-medium transition duration-300">
+									Read More →
+								</a>
+							</div>
+						</article>
+					))}
+				</div>
+			) : (
+				<div class="text-center py-12">
+					<p class="text-gray-600 text-lg mb-6">
+						Insights and articles will be published here regularly.
+					</p>
+					<a href="/insights" class="text-purple-600 hover:text-purple-800 font-medium">
+						Visit our insights page →
+					</a>
+				</div>
+			)}
+		</div>
+	</section>
 </BaseLayout>

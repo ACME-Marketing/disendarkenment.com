@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { graphQLClient, gql } from '../lib/graphql';
+
+// Fetch all posts for the insights page
+const GET_ALL_POSTS = gql`
+  query GetAllPosts {
+    posts(first: 20, where: { tagSlugIn: ["disendarkenment", "all"], orderby: { field: DATE, order: DESC } }) {
+      nodes {
+        title
+        excerpt
+        uri
+        date
+        featuredImage {
+          node {
+            sourceUrl
+            altText
+            mediaDetails {
+              width
+              height
+            }
+          }
+        }
+        tags {
+          nodes {
+            name
+            slug
+          }
+        }
+        author {
+          node {
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+let posts: any[] = [];
+let error: string | null = null;
+
+try {
+  const data: any = await graphQLClient.request(GET_ALL_POSTS);
+  posts = data.posts.nodes || [];
+} catch (err: any) {
+  console.error("Error fetching posts:", err);
+  error = err.message || "An error occurred while fetching posts";
+}
+
+// Format date function
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  });
+}
+---
+
+<BaseLayout 
+  title="Insights - Disendarkenment" 
+  description="Explore insights, articles, and resources about psychedelic therapy, psilocybin facilitation, and journey integration from licensed professionals."
+  keywords="psychedelic insights, psilocybin articles, therapy resources, integration guidance, psychedelic education"
+>
+  <div class="bg-gradient-to-b from-purple-50 to-white min-h-screen">
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 text-white py-20">
+      <div class="container mx-auto px-4 text-center">
+        <h1 class="text-5xl font-bold mb-6">Insights & Resources</h1>
+        <p class="text-xl text-purple-200 max-w-3xl mx-auto">
+          Explore our collection of articles, insights, and resources about psychedelic therapy, 
+          journey preparation, integration practices, and the evolving landscape of consciousness exploration.
+        </p>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+      {error ? (
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold text-red-800 mb-4">Unable to Load Posts</h2>
+          <p class="text-red-600">We're experiencing technical difficulties loading our latest insights. Please try again later.</p>
+        </div>
+      ) : posts.length === 0 ? (
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
+          <h2 class="text-2xl font-bold text-blue-800 mb-4">Coming Soon</h2>
+          <p class="text-blue-600">We're preparing valuable insights and resources for you. Check back soon for our latest articles and guidance.</p>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              {post.featuredImage && post.featuredImage.node && (
+                <div class="aspect-w-16 aspect-h-9">
+                  <img 
+                    src={post.featuredImage.node.sourceUrl} 
+                    alt={post.featuredImage.node.altText || post.title}
+                    class="w-full h-48 object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              
+              <div class="p-6">
+                <div class="flex items-center text-sm text-gray-500 mb-3">
+                  <time datetime={post.date}>
+                    {formatDate(post.date)}
+                  </time>
+                  {post.author && post.author.node && (
+                    <>
+                      <span class="mx-2">•</span>
+                      <span>By {post.author.node.name}</span>
+                    </>
+                  )}
+                </div>
+                
+                <h2 class="text-xl font-bold text-gray-900 mb-3 line-clamp-2">
+                  <a 
+                    href={`/posts${post.uri}`} 
+                    class="hover:text-purple-600 transition-colors duration-300"
+                  >
+                    {post.title}
+                  </a>
+                </h2>
+                
+                {post.excerpt && (
+                  <div 
+                    class="text-gray-600 mb-4 line-clamp-3" 
+                    set:html={post.excerpt}
+                  />
+                )}
+                
+                {post.tags && post.tags.nodes.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.tags.nodes.slice(0, 3).map((tag) => (
+                      <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">
+                        {tag.name}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                
+                <a 
+                  href={`/posts${post.uri}`}
+                  class="inline-flex items-center text-purple-600 hover:text-purple-800 font-medium transition-colors duration-300"
+                >
+                  Read More
+                  <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                  </svg>
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+      
+      {posts.length > 0 && (
+        <div class="text-center mt-12">
+          <p class="text-gray-600 mb-6">
+            Looking for more insights? Our team regularly publishes new content to support your journey.
+          </p>
+          <a 
+            href="/get-started" 
+            class="inline-block bg-purple-600 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 font-medium"
+          >
+            Schedule a Consultation
+          </a>
+        </div>
+      )}
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .aspect-w-16 {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  }
+  
+  .aspect-w-16 img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>
