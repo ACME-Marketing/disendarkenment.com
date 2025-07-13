@@ -5,10 +5,10 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://disendarkenment.com',
+  site: 'https://disendarkenment.netlify.app',
   prefetch: {
-    prefetchAll: true,
-    defaultStrategy: 'hover'
+    prefetchAll: false,
+    defaultStrategy: 'tap'
   },
   integrations: [
     tailwind(),
