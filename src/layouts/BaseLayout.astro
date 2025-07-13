@@ -144,8 +144,8 @@ const finalStructuredData = structuredData || defaultStructuredData;
 		
 		<!-- Critical CSS will be inlined by Astro -->
 		
-		<!-- Google Analytics 4 (Partytown) -->
-		<script type="text/partytown">
+		<!-- Google Analytics 4 -->
+		<script is:inline>
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
@@ -154,7 +154,7 @@ const finalStructuredData = structuredData || defaultStructuredData;
 				page_location: window.location.href
 			});
 		</script>
-		<script type="text/partytown" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+		<script is:inline src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 	</head>
 	<body class="min-h-screen flex flex-col">
 		<!-- Skip to main content for accessibility -->

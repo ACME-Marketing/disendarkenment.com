@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
-import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
@@ -30,12 +29,6 @@ export default defineConfig({
           item.changefreq = 'weekly';
         }
         return item;
-      }
-    }),
-    partytown({
-      config: {
-        forward: ["gtag", "dataLayer.push"],
-        debug: false
       }
     })
   ],
