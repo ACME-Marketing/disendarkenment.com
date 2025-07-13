@@ -2,6 +2,14 @@
   publish = "dist"
   command = "npm install && npm run build"
 
+# Redirect non-www to www
+[[redirects]]
+  from = "https://disendarkenment.com/*"
+  to = "https://www.disendarkenment.com/:splat"
+  status = 301
+  force = true
+
+# SPA fallback for client-side routing
 [[redirects]]
   from = "/*"
   to = "/index.html"
