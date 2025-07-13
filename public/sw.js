@@ -1,6 +1,6 @@
-const CACHE_NAME = 'disendarkenment-v2';
-const STATIC_CACHE = 'disendarkenment-static-v2';
-const DYNAMIC_CACHE = 'disendarkenment-dynamic-v2';
+const CACHE_NAME = 'disendarkenment-v4';
+const STATIC_CACHE = 'disendarkenment-static-v4';
+const DYNAMIC_CACHE = 'disendarkenment-dynamic-v4';
 
 // Assets to cache on install
 const STATIC_ASSETS = [
@@ -20,7 +20,7 @@ const STATIC_ASSETS = [
 
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
-  console.log('Service Worker: Installing...');
+  console.log('Service Worker: Installing v4...');
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
@@ -37,14 +37,16 @@ self.addEventListener('install', (event) => {
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - aggressively clean up ALL old caches
 self.addEventListener('activate', (event) => {
-  console.log('Service Worker: Activating...');
+  console.log('Service Worker: Activating v4...');
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
+        console.log('Service Worker: Found caches:', cacheNames);
         return Promise.all(
           cacheNames.map((cacheName) => {
+            // Delete ALL caches that don't match current version
             if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
               console.log('Service Worker: Deleting old cache', cacheName);
               return caches.delete(cacheName);
@@ -53,13 +55,16 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        console.log('Service Worker: Activated');
+        console.log('Service Worker: All old caches cleared');
         return self.clients.claim();
+      })
+      .then(() => {
+        console.log('Service Worker: Activated and claimed all clients');
       })
   );
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - bypass cache completely to avoid redirect issues
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -74,43 +79,54 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  console.log('Service Worker: Handling request for', request.url);
+
+  // For now, always fetch from network to avoid cached redirect issues
   event.respondWith(
-    caches.match(request)
-      .then((cachedResponse) => {
-        if (cachedResponse) {
-          console.log('Service Worker: Serving from cache', request.url);
-          return cachedResponse;
+    fetch(request, { 
+      redirect: 'follow',
+      cache: 'no-cache' // Force fresh requests
+    })
+      .then((networkResponse) => {
+        console.log('Service Worker: Network response for', request.url, 'Status:', networkResponse.status, 'Redirected:', networkResponse.redirected);
+        
+        // Only cache successful, non-redirected responses
+        if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic' && !networkResponse.redirected) {
+          // Clone the response for caching
+          const responseToCache = networkResponse.clone();
+
+          // Determine which cache to use
+          const cacheToUse = STATIC_ASSETS.includes(url.pathname) ? STATIC_CACHE : DYNAMIC_CACHE;
+
+          // Cache the response (but don't wait for it)
+          caches.open(cacheToUse)
+            .then((cache) => {
+              console.log('Service Worker: Caching successful response for', request.url);
+              return cache.put(request, responseToCache);
+            })
+            .catch((error) => {
+              console.error('Service Worker: Error caching response for', request.url, error);
+            });
+        } else {
+          console.log('Service Worker: Not caching response for', request.url, 'Status:', networkResponse.status, 'Redirected:', networkResponse.redirected);
         }
 
-        // Not in cache, fetch from network
-        return fetch(request, { redirect: 'follow' })
-          .then((networkResponse) => {
-            // Don't cache redirect responses or non-successful responses
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic' || networkResponse.redirected) {
-              return networkResponse;
+        return networkResponse;
+      })
+      .catch((error) => {
+        console.error('Service Worker: Network fetch failed for', request.url, error);
+        
+        // Try to serve from cache as fallback only
+        return caches.match(request)
+          .then((cachedResponse) => {
+            if (cachedResponse) {
+              console.log('Service Worker: Serving from cache as fallback for', request.url);
+              return cachedResponse;
             }
-
-            // Clone the response
-            const responseToCache = networkResponse.clone();
-
-            // Determine which cache to use
-            const cacheToUse = STATIC_ASSETS.includes(url.pathname) ? STATIC_CACHE : DYNAMIC_CACHE;
-
-            // Cache the response
-            caches.open(cacheToUse)
-              .then((cache) => {
-                console.log('Service Worker: Caching new resource', request.url);
-                cache.put(request, responseToCache);
-              });
-
-            return networkResponse;
-          })
-          .catch((error) => {
-            console.error('Service Worker: Fetch failed', error);
             
             // Return offline page for navigation requests
             if (request.destination === 'document') {
-              return caches.match('/offline.html') || new Response(
+              return new Response(
                 `<!DOCTYPE html>
                 <html>
                 <head>
@@ -205,5 +221,19 @@ self.addEventListener('notificationclick', (event) => {
 self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
+  }
+  
+  // Handle cache clearing requests
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    event.waitUntil(
+      caches.keys().then((cacheNames) => {
+        return Promise.all(
+          cacheNames.map((cacheName) => {
+            console.log('Service Worker: Clearing cache', cacheName);
+            return caches.delete(cacheName);
+          })
+        );
+      })
+    );
   }
 });
