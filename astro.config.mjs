@@ -5,7 +5,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.disendarkenment.com',
+  site: 'https://disendarkenment.com',
   prefetch: {
     prefetchAll: false,
     defaultStrategy: 'tap'
@@ -25,7 +25,7 @@ export default defineConfig({
         } else if (item.url.includes('/readiness-assessment')) {
           item.priority = 0.9;
           item.changefreq = 'monthly';
-        } else if (item.url === 'https://www.disendarkenment.com/') {
+        } else if (item.url === 'https://disendarkenment.com/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
         }
