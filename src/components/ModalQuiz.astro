@@ -118,7 +118,7 @@ const {
 
 <script>
   // @ts-nocheck
-  import { QUIZ_QUESTIONS, calculateQuizScore, formatScore } from '../lib/quiz-logic.js';
+  import { quizQuestions, calculateScore, formatScore } from '../lib/quiz-logic.js';
 
   class ModalQuiz {
     constructor(container) {
@@ -201,7 +201,7 @@ const {
       const content = this.container.querySelector('.quiz-content');
       if (!content) return;
 
-      const question = QUIZ_QUESTIONS[this.currentQuestionIndex];
+      const question = this.questions[this.currentQuestionIndex];
       if (!question) return;
 
       content.innerHTML = `
@@ -261,10 +261,10 @@ const {
       prevBtn.disabled = this.currentQuestionIndex === 0;
 
       // Next button
-      const currentQuestion = QUIZ_QUESTIONS[this.currentQuestionIndex];
+      const currentQuestion = this.questions[this.currentQuestionIndex];
       const hasAnswer = this.answers[currentQuestion.id] !== undefined;
       
-      if (this.currentQuestionIndex === QUIZ_QUESTIONS.length - 1) {
+      if (this.currentQuestionIndex === this.questions.length - 1) {
         nextBtn.textContent = 'Get Results';
         nextBtn.disabled = !hasAnswer;
       } else {
@@ -274,12 +274,12 @@ const {
     }
 
     nextQuestion() {
-      if (this.currentQuestionIndex === QUIZ_QUESTIONS.length - 1) {
+      if (this.currentQuestionIndex === this.questions.length - 1) {
         this.showResults();
         return;
       }
 
-      if (this.currentQuestionIndex < QUIZ_QUESTIONS.length - 1) {
+      if (this.currentQuestionIndex < this.questions.length - 1) {
         this.currentQuestionIndex++;
         this.renderQuestion();
         this.updateProgress();
@@ -299,17 +299,17 @@ const {
       const counter = this.container.querySelector('[data-quiz-counter]');
       
       if (progressBar) {
-        const percentage = ((this.currentQuestionIndex + 1) / QUIZ_QUESTIONS.length) * 100;
+        const percentage = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
         progressBar.style.width = `${percentage}%`;
       }
       
       if (counter) {
-        counter.textContent = `Question ${this.currentQuestionIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+        counter.textContent = `Question ${this.currentQuestionIndex + 1} of ${this.questions.length}`;
       }
     }
 
     showResults() {
-      const score = calculateQuizScore(this.answers);
+      const score = calculateScore(this.answers);
       const formattedScore = formatScore(score);
       
       // Close quiz modal
