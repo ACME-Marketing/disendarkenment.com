@@ -56,21 +56,30 @@ const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}
     }
 
     async handleClick() {
-      // Check if modal components are loaded
-      if (!window.ModalQuiz || !window.ResultsModal) {
-        console.warn('Modal components not loaded, loading dynamically...');
-        await this.loadModalComponents();
+      // Find the quiz modal instance
+      const quizModalContainer = document.querySelector('.quiz-modal-container');
+      if (quizModalContainer && quizModalContainer.__quizInstance) {
+        quizModalContainer.__quizInstance.open();
+        return;
       }
 
-      // Create modal containers if they don't exist
-      this.ensureModalContainers();
-
-      // Initialize modals
-      const quizModal = document.querySelector('[data-quiz-modal]')?.__modalInstance;
-      const resultsModal = document.querySelector('[data-results-modal]')?.__modalInstance;
-
+      // Fallback: try to find any quiz modal
+      const quizModal = document.querySelector('[data-quiz-overlay]');
       if (quizModal) {
-        quizModal.open();
+        const modalInstance = quizModal.closest('.quiz-modal-container')?.__quizInstance;
+        if (modalInstance) {
+          modalInstance.open();
+        } else {
+          // Manual open
+          quizModal.classList.remove('hidden');
+          quizModal.classList.add('flex');
+          document.body.style.overflow = 'hidden';
+          
+          // Initialize quiz content
+          const quizInstance = new window.QuizModal(quizModal.closest('.quiz-modal-container'));
+          quizModal.closest('.quiz-modal-container').__quizInstance = quizInstance;
+          quizInstance.open();
+        }
       } else {
         console.error('Quiz modal not found');
       }

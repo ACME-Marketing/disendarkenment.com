@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTAButton from '../components/CTAButton.astro';
-import ModalQuiz from '../components/ModalQuiz.astro';
+import QuizModal from '../components/QuizModal.astro';
 import ResultsModal from '../components/ResultsModal.astro';
 
 const title = 'Quiz Demo - Psychedelic Therapy Readiness Assessment';
@@ -125,7 +125,7 @@ const description = 'Interactive demo of the new modal-based psychedelic therapy
 
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-3">2. Include Modal Components</h3>
-            <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code><ModalQuiz />
+            <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code><QuizModal />
 <ResultsModal /></code></pre>
           </div>
 
@@ -152,7 +152,7 @@ const description = 'Interactive demo of the new modal-based psychedelic therapy
   </main>
 
   <!-- Include modal components -->
-  <ModalQuiz />
+  <QuizModal />
   <ResultsModal />
 </BaseLayout>
 
