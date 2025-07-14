@@ -35,7 +35,7 @@ export default async (request, context) => {
     }
     
     // Forward the request to the n8n webhook
-    const response = await fetch('https://n8n.srv874889.hstgr.cloud/webhook-test/b1fc5008-d10f-42f0-92aa-91d8a3806319', {
+    const response = await fetch('https://n8n.srv874889.hstgr.cloud/webhook/b1fc5008-d10f-42f0-92aa-91d8a3806319', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
