@@ -1,10 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { graphQLClient, gql } from '../lib/graphql';
+import { requestWithRetry, gql } from '../lib/graphql';
 
 const GET_POSTS = gql`
   query GetPosts {
-    posts(first: 6, where: { orderby: { field: DATE, order: DESC } }) {
+    posts(first: 6, where: { tagSlugIn: ["disendarkenment", "all"], orderby: { field: DATE, order: DESC } }) {
       nodes {
         title
         uri
@@ -54,10 +54,10 @@ interface Post {
 
 let posts: Post[] = [];
 try {
-  const data: any = await graphQLClient.request(GET_POSTS);
+  const data: any = await requestWithRetry(GET_POSTS);
   posts = data.posts.nodes;
 } catch (error) {
-  console.error("Error fetching posts:", error);
+  console.error("Error fetching posts after retries:", error);
 }
 ---
 

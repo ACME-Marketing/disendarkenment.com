@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { graphQLClient, gql } from '../lib/graphql';
+import { requestWithRetry, gql } from '../lib/graphql';
 
 // Fetch all posts for the insights page
 const GET_ALL_POSTS = gql`
   query GetAllPosts {
-    posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
+    posts(first: 100, where: { tagSlugIn: ["disendarkenment", "all"], orderby: { field: DATE, order: DESC } }) {
       nodes {
         title
         excerpt
@@ -41,10 +41,10 @@ let posts: any[] = [];
 let error: string | null = null;
 
 try {
-  const data: any = await graphQLClient.request(GET_ALL_POSTS);
+  const data: any = await requestWithRetry(GET_ALL_POSTS);
   posts = data.posts.nodes || [];
 } catch (err: any) {
-  console.error("Error fetching posts:", err);
+  console.error("Error fetching posts after retries:", err);
   error = err.message || "An error occurred while fetching posts";
 }
 
