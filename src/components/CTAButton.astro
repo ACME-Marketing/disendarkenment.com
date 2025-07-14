@@ -1,0 +1,148 @@
+---
+export interface Props {
+  text?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  quizId?: string;
+}
+
+const { 
+  text = 'Take the Readiness Quiz', 
+  variant = 'primary', 
+  size = 'md', 
+  className = '',
+  quizId = 'default-quiz'
+} = Astro.props;
+
+const baseClasses = 'font-semibold rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
+
+const variants = {
+  primary: 'bg-purple-600 hover:bg-purple-500 text-white focus:ring-purple-500',
+  secondary: 'bg-green-600 hover:bg-green-500 text-white focus:ring-green-500',
+  outline: 'border-2 border-purple-600 text-purple-600 hover:bg-purple-50 focus:ring-purple-500'
+};
+
+const sizes = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+
+const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+<button 
+  class={classes}
+  data-cta-button
+  data-quiz-id={quizId}
+  type="button"
+>
+  {text}
+</button>
+
+<script>
+  // @ts-nocheck
+  class CTAButton {
+    constructor(button) {
+      this.button = button;
+      this.quizId = button.dataset.quizId || 'default-quiz';
+      
+      this.init();
+    }
+
+    init() {
+      this.button.addEventListener('click', () => this.handleClick());
+    }
+
+    async handleClick() {
+      // Check if modal components are loaded
+      if (!window.ModalQuiz || !window.ResultsModal) {
+        console.warn('Modal components not loaded, loading dynamically...');
+        await this.loadModalComponents();
+      }
+
+      // Create modal containers if they don't exist
+      this.ensureModalContainers();
+
+      // Initialize modals
+      const quizModal = document.querySelector('[data-quiz-modal]')?.__modalInstance;
+      const resultsModal = document.querySelector('[data-results-modal]')?.__modalInstance;
+
+      if (quizModal) {
+        quizModal.open();
+      } else {
+        console.error('Quiz modal not found');
+      }
+    }
+
+    async loadModalComponents() {
+      // Load modal components dynamically
+      const scripts = [
+        '/src/components/ModalQuiz.astro',
+        '/src/components/ResultsModal.astro'
+      ];
+
+      // In a real implementation, these would be pre-compiled
+      // For now, we'll just ensure the classes are available
+      return Promise.resolve();
+    }
+
+    ensureModalContainers() {
+      // Ensure quiz modal container exists
+      if (!document.querySelector('[data-quiz-modal]')) {
+        const quizContainer = document.createElement('div');
+        quizContainer.setAttribute('data-quiz-modal', '');
+        quizContainer.innerHTML = `
+          <div class="quiz-modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4" data-quiz-overlay>
+            <div class="quiz-modal bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-hidden">
+              <div class="quiz-header bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-2xl font-bold">Psychedelic Therapy Readiness Quiz</h2>
+                  <button class="quiz-close text-white hover:text-gray-200 text-2xl font-bold" data-quiz-close>×</button>
+                </div>
+              </div>
+              <div class="quiz-content p-6">
+                <p>Loading quiz...</p>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(quizContainer);
+      }
+
+      // Ensure results modal container exists
+      if (!document.querySelector('[data-results-modal]')) {
+        const resultsContainer = document.createElement('div');
+        resultsContainer.setAttribute('data-results-modal', '');
+        resultsContainer.innerHTML = `
+          <div class="results-modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4" data-results-overlay>
+            <div class="results-modal bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+              <div class="results-header bg-gradient-to-r from-green-600 to-blue-600 text-white p-6">
+                <div class="flex justify-between items-center">
+                  <h2 class="text-2xl font-bold">Your Readiness Assessment Results</h2>
+                  <button class="results-close text-white hover:text-gray-200 text-2xl font-bold" data-results-close>×</button>
+                </div>
+              </div>
+              <div class="results-content p-6">
+                <p>Loading results...</p>
+              </div>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(resultsContainer);
+      }
+    }
+  }
+
+  // Initialize all CTA buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('[data-cta-button]');
+    buttons.forEach(button => {
+      new CTAButton(button);
+    });
+  });
+
+  // Make it globally available
+  window.CTAButton = CTAButton;
+</script>
