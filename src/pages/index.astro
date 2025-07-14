@@ -4,7 +4,7 @@ import { graphQLClient, gql } from '../lib/graphql';
 
 const GET_POSTS = gql`
   query GetPosts {
-    posts(where: { tagSlugIn: ["disendarkenment", "all"] }) {
+    posts(first: 6, where: { orderby: { field: DATE, order: DESC } }) {
       nodes {
         title
         uri
