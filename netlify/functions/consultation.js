@@ -1,8 +1,20 @@
-import type { APIRoute } from 'astro';
+export default async (request, context) => {
+  // Only allow POST requests
+  if (request.method !== 'POST') {
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: 'Method not allowed' 
+    }), {
+      status: 405,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      },
+    });
+  }
 
-export const prerender = false;
-
-export const POST: APIRoute = async ({ request }) => {
   try {
     // Get the form data from the request
     let formData;
@@ -10,13 +22,14 @@ export const POST: APIRoute = async ({ request }) => {
       formData = await request.json();
     } catch (jsonError) {
       console.error('JSON parsing error:', jsonError);
-      return new Response(JSON.stringify({
-        success: false,
-        error: 'Invalid request format'
+      return new Response(JSON.stringify({ 
+        success: false, 
+        error: 'Invalid request format' 
       }), {
         status: 400,
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
       });
     }
@@ -35,6 +48,7 @@ export const POST: APIRoute = async ({ request }) => {
         status: 200,
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
         },
       });
     } else {
@@ -44,13 +58,14 @@ export const POST: APIRoute = async ({ request }) => {
     }
   } catch (error) {
     console.error('Consultation form submission error:', error);
-    return new Response(JSON.stringify({
-      success: false,
-      error: 'Failed to submit consultation request'
+    return new Response(JSON.stringify({ 
+      success: false, 
+      error: 'Failed to submit consultation request' 
     }), {
       status: 500,
       headers: {
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
       },
     });
   }

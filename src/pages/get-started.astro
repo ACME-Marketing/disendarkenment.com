@@ -469,8 +469,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		showLoadingState();
 		
 		try {
-			// Submit to our API route which proxies to n8n webhook
-			const response = await fetch('/api/consultation', {
+			// Submit to Netlify function which proxies to n8n webhook
+			const response = await fetch('/.netlify/functions/consultation', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
