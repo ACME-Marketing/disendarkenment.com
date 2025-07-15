@@ -284,8 +284,7 @@ export class SecurityManager {
         return input
             .replace(/[<>]/g, '') // Remove potential HTML tags
             .replace(/javascript:/gi, '') // Remove javascript: protocol
-            .replace(/on\w+=/gi, '') // Remove event handlers
-            .trim();
+            .replace(/on\w+=/gi, ''); // Remove event handlers
     }
 
     sanitizeHTML(html) {
@@ -569,10 +568,13 @@ export class SecurityManager {
         window.fetch = async (...args) => {
             const response = await originalFetch(...args);
             
-            // Log suspicious requests
-            if (response.status >= 400) {
+            const requestInfo = args[0];
+            const requestUrl = typeof requestInfo === 'string' ? requestInfo : requestInfo.url;
+
+            // Log suspicious requests, but not for the security log endpoint itself
+            if (response.status >= 400 && !requestUrl.includes('/api/security-log')) {
                 this.logSecurityEvent('failed_request', {
-                    url: args[0],
+                    url: requestUrl,
                     status: response.status,
                     timestamp: Date.now()
                 });

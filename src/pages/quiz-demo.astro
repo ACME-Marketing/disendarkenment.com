@@ -11,7 +11,6 @@ const description = 'Interactive demo of the new modal-based psychedelic therapy
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 py-12">
     <div class="max-w-6xl mx-auto px-4">
-      <!-- Hero Section -->
       <section class="text-center mb-16">
         <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Quiz System Demo
@@ -21,149 +20,361 @@ const description = 'Interactive demo of the new modal-based psychedelic therapy
         </p>
       </section>
 
-      <!-- Demo Section -->
       <section class="bg-white rounded-lg shadow-lg p-8 mb-12">
         <h2 class="text-2xl font-bold text-gray-900 mb-6">Interactive Demo</h2>
-        
         <div class="grid md:grid-cols-2 gap-8">
-          <!-- Primary CTA -->
           <div class="text-center p-6 bg-purple-50 rounded-lg">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Primary CTA Button</h3>
             <p class="text-gray-600 mb-4">Standard primary button with quiz trigger</p>
-            <CTAButton 
-              text="Take the Readiness Quiz" 
-              variant="primary" 
-              size="lg"
-            />
+            <CTAButton text="Take the Readiness Quiz" variant="primary" size="lg" />
           </div>
-
-          <!-- Secondary CTA -->
           <div class="text-center p-6 bg-green-50 rounded-lg">
             <h3 class="text-lg font-semibold text-gray-900 mb-4">Secondary CTA Button</h3>
             <p class="text-gray-600 mb-4">Alternative styling for different contexts</p>
-            <CTAButton 
-              text="Check Your Readiness" 
-              variant="secondary" 
-              size="lg"
-            />
+            <CTAButton text="Check Your Readiness" variant="secondary" size="lg" />
           </div>
-
-          <!-- Outline CTA -->
-          <div class="text-center p-6 bg-blue-50 rounded-lg">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Outline CTA Button</h3>
-            <p class="text-gray-600 mb-4">Subtle outline style for secondary placement</p>
-            <CTAButton 
-              text="Start Assessment" 
-              variant="outline" 
-              size="lg"
-            />
-          </div>
-
-          <!-- Small CTA -->
-          <div class="text-center p-6 bg-gray-50 rounded-lg">
-            <h3 class="text-lg font-semibold text-gray-900 mb-4">Small CTA Button</h3>
-            <p class="text-gray-600 mb-4">Compact size for inline placement</p>
-            <CTAButton 
-              text="Quiz" 
-              variant="primary" 
-              size="sm"
-            />
-          </div>
-        </div>
-      </section>
-
-      <!-- Features Section -->
-      <section class="bg-white rounded-lg shadow-lg p-8 mb-12">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Quiz Features</h2>
-        
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="text-center p-4">
-            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">Step-by-Step</h3>
-            <p class="text-gray-600 text-sm">Questions appear one at a time for better focus</p>
-          </div>
-
-          <div class="text-center p-4">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">Progress Tracking</h3>
-            <p class="text-gray-600 text-sm">Visual progress bar shows completion status</p>
-          </div>
-
-          <div class="text-center p-4">
-            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="font-semibold text-gray-900 mb-2">Instant Results</h3>
-            <p class="text-gray-600 text-sm">Get personalized recommendations immediately</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Integration Guide -->
-      <section class="bg-white rounded-lg shadow-lg p-8">
-        <h2 class="text-2xl font-bold text-gray-900 mb-6">Integration Guide</h2>
-        
-        <div class="space-y-6">
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-3">1. Add CTA Buttons</h3>
-            <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code><CTAButton 
-  text="Take the Readiness Quiz" 
-  variant="primary" 
-  size="lg" 
-/></code></pre>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-3">2. Include Modal Components</h3>
-            <pre class="bg-gray-100 p-4 rounded-lg text-sm overflow-x-auto"><code><QuizModal />
-<ResultsModal /></code></pre>
-          </div>
-
-          <div>
-            <h3 class="text-lg font-semibold text-gray-900 mb-3">3. Customize Styling</h3>
-            <p class="text-gray-600">All components use Tailwind CSS and can be customized via props or CSS classes.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Test Instructions -->
-      <section class="mt-12 text-center">
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-          <h3 class="text-lg font-semibold text-yellow-800 mb-2">Testing Instructions</h3>
-          <p class="text-yellow-700 mb-4">
-            Click any of the CTA buttons above to test the full quiz flow. The quiz will open in a modal and guide you through the assessment.
-          </p>
-          <p class="text-sm text-yellow-600">
-            Note: This is a demo environment. In production, the quiz will integrate with your existing booking system.
-          </p>
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Include modal components -->
   <QuizModal />
   <ResultsModal />
 </BaseLayout>
 
-<style>
-  /* Additional demo styles */
-  .demo-section {
-    transition: all 0.3s ease;
-  }
-  
-  .demo-section:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  }
-</style>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const quizQuestions = [
+    {
+      id: 'mental_health',
+      category: 'Mental Health',
+      question: 'How would you rate your current mental health stability?',
+      options: [
+        { text: 'Excellent - I feel mentally stable and resilient', value: 5 },
+        { text: 'Good - Generally stable with occasional challenges', value: 4 },
+        { text: 'Fair - Some ongoing mental health concerns', value: 3 },
+        { text: 'Poor - Significant mental health challenges', value: 2 },
+        { text: 'Very poor - Currently in crisis or severe distress', value: 1 }
+      ]
+    },
+    {
+      id: 'support_system',
+      category: 'Support System',
+      question: 'Do you have a reliable support system (friends, family, therapist)?',
+      options: [
+        { text: 'Strong support system with multiple people I trust', value: 5 },
+        { text: 'Good support from family and/or close friends', value: 4 },
+        { text: 'Some support but limited', value: 3 },
+        { text: 'Minimal support available', value: 2 },
+        { text: 'Little to no support system', value: 1 }
+      ]
+    },
+    {
+      id: 'intention',
+      category: 'Intention & Motivation',
+      question: 'How clear are you about your intentions for psychedelic therapy?',
+      options: [
+        { text: 'Very clear - I have specific, well-defined goals', value: 5 },
+        { text: 'Mostly clear - I know what I want to work on', value: 4 },
+        { text: 'Somewhat clear - I have general ideas', value: 3 },
+        { text: 'Unclear - I need help defining my goals', value: 2 },
+        { text: 'No clear intention or goals', value: 1 }
+      ]
+    },
+    {
+      id: 'preparation',
+      category: 'Preparation',
+      question: 'How much preparation work have you done for this journey?',
+      options: [
+        { text: 'Extensive - Research, therapy, meditation practice', value: 5 },
+        { text: 'Significant - Some research and self-reflection', value: 4 },
+        { text: 'Moderate - Basic research and understanding', value: 3 },
+        { text: 'Minimal - Just starting to learn', value: 2 },
+        { text: 'None - No preparation yet', value: 1 }
+      ]
+    },
+    {
+      id:'medical_clearance',
+      category: 'Medical Health',
+      question: 'Have you been medically cleared for psychedelic therapy?',
+      options: [
+        { text: 'Yes - Cleared by my physician', value: 5 },
+        { text: 'Mostly - No major contraindications known', value: 4 },
+        { text: 'Partial - Some minor concerns to discuss', value: 3 },
+        { text: 'Uncertain - Need medical evaluation', value: 2 },
+        { text: 'No - Have contraindications or unsure', value: 1 }
+      ]
+    },
+    {
+      id: 'integration_readiness',
+      category: 'Integration Readiness',
+      question: 'How ready are you to commit to integration work after the experience?',
+      options: [
+        { text: 'Fully committed - I understand integration is crucial', value: 5 },
+        { text: 'Very ready - I plan to prioritize integration', value: 4 },
+        { text: 'Moderately ready - I\'ll make time for it', value: 3 },
+        { text: 'Somewhat ready - I\'ll try but may struggle', value: 2 },
+        { text: 'Not ready - I don\'t see the importance', value: 1 }
+      ]
+    },
+    {
+      id: 'substance_use',
+      category: 'Substance Use',
+      question: 'How is your relationship with substances (alcohol, cannabis, etc.)?',
+      options: [
+        { text: 'Healthy - No problematic use patterns', value: 5 },
+        { text: 'Generally healthy - Occasional recreational use', value: 4 },
+        { text: 'Some concerns - Moderate use patterns', value: 3 },
+        { text: 'Problematic - Regular problematic use', value: 2 },
+        { text: 'Addictive - Struggling with substance use', value: 1 }
+      ]
+    },
+    {
+      id: 'trauma_history',
+      category: 'Trauma History',
+      question: 'How well have you processed past traumas or difficult experiences?',
+      options: [
+        { text: 'Well processed - Extensive therapy and healing work', value: 5 },
+        { text: 'Mostly processed - Significant healing has occurred', value: 4 },
+        { text: 'Partially processed - Some work done', value: 3 },
+        { text: 'Minimally processed - Little therapeutic work', value: 2 },
+        { text: 'Unprocessed - Significant unresolved trauma', value: 1 }
+      ]
+    },
+    {
+      id: 'expectations',
+      category: 'Expectations',
+      question: 'How realistic are your expectations about psychedelic therapy?',
+      options: [
+        { text: 'Very realistic - I understand it\'s not a magic cure', value: 5 },
+        { text: 'Mostly realistic - I have reasonable expectations', value: 4 },
+        { text: 'Somewhat realistic - I have some misconceptions', value: 3 },
+        { text: 'Unrealistic - I expect it to fix everything', value: 2 },
+        { text: 'Very unrealistic - I have dangerous expectations', value: 1 }
+      ]
+    },
+    {
+      id: 'commitment',
+      category: 'Commitment',
+      question: 'How committed are you to the full therapeutic process?',
+      options: [
+        { text: 'Fully committed - Time, money, and emotional investment', value: 5 },
+        { text: 'Very committed - Ready to invest significantly', value: 4 },
+        { text: 'Moderately committed - Willing to invest some resources', value: 3 },
+        { text: 'Somewhat committed - Limited resources to invest', value: 2 },
+        { text: 'Minimally committed - Not ready to invest much', value: 1 }
+      ]
+    }
+  ];
+
+    function calculateScore(answers) {
+      const totalScore = Object.values(answers).reduce((sum, value) => sum + value, 0);
+      const maxScore = quizQuestions.length * 5;
+      const percentage = Math.round((totalScore / maxScore) * 100);
+      let level, description, action, color, bgColor;
+
+      if (percentage >= 80) {
+        level = 'High';
+        description = 'You appear to be well-prepared for psychedelic therapy with strong foundations in place.';
+        action = 'You\'re ready to schedule a consultation to discuss your journey in detail.';
+        color = 'text-green-700';
+        bgColor = 'bg-green-100';
+      } else if (percentage >= 60) {
+        level = 'Moderate';
+        description = 'You have some good foundations but may benefit from additional preparation.';
+        action = 'Consider scheduling a consultation to discuss areas that need strengthening.';
+        color = 'text-yellow-700';
+        bgColor = 'bg-yellow-100';
+      } else if (percentage >= 40) {
+        level = 'Low-Moderate';
+        description = 'You may need significant preparation before pursuing psychedelic therapy.';
+        action = 'We recommend additional preparation work and consultation before proceeding.';
+        color = 'text-orange-700';
+        bgColor = 'bg-orange-100';
+      } else {
+        level = 'Low';
+        description = 'You may not be ready for psychedelic therapy at this time.';
+        action = 'Focus on building foundations through therapy, support systems, and education first.';
+        color = 'text-red-700';
+        bgColor = 'bg-red-100';
+      }
+
+      return { percentage, level: { level, description, action, color, bgColor } };
+    }
+
+    function generateRecommendations(answers) {
+      const recommendations = [];
+      if (answers.mental_health <= 2) {
+        recommendations.push({ category: 'Mental Health', priority: 'high', suggestion: 'Consider working with a mental health professional to stabilize your mental health before pursuing psychedelic therapy.' });
+      }
+       if (answers.support_system <= 2) {
+        recommendations.push({ category: 'Support System', priority: 'high', suggestion: 'Focus on building a reliable support network before beginning psychedelic therapy.' });
+      }
+      if (answers.preparation <= 2) {
+        recommendations.push({ category: 'Preparation', priority: 'high', suggestion: 'Invest significant time in research, reading, and learning about psychedelic therapy.' });
+      }
+      return recommendations;
+    }
+
+    const quizManager = {
+      quizModal: document.querySelector('.quiz-modal-container'),
+      resultsModal: document.querySelector('.results-modal-container'),
+      currentQuestionIndex: 0,
+      answers: {},
+      
+      init() {
+        this.bindEvents();
+      },
+
+      bindEvents() {
+        document.body.addEventListener('click', (e) => {
+          if (e.target.closest('[data-quiz-trigger]')) {
+            this.openQuiz();
+          }
+        });
+        this.quizModal.querySelector('[data-quiz-close]').addEventListener('click', () => this.closeQuiz());
+        this.quizModal.querySelector('[data-quiz-prev]').addEventListener('click', () => this.previousQuestion());
+        this.quizModal.querySelector('[data-quiz-next]').addEventListener('click', () => this.nextQuestion());
+        this.resultsModal.querySelector('[data-results-close]').addEventListener('click', () => this.closeResults());
+        this.resultsModal.querySelector('[data-results-back]').addEventListener('click', () => this.backToQuiz());
+        this.resultsModal.querySelector('[data-results-book]').addEventListener('click', () => this.bookConsultation());
+      },
+      
+      openQuiz() {
+        this.quizModal.querySelector('[data-quiz-overlay]').classList.remove('hidden');
+        this.quizModal.querySelector('[data-quiz-overlay]').classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        this.currentQuestionIndex = 0;
+        this.answers = {};
+        this.renderQuestion();
+        this.updateNavigation();
+      },
+
+      closeQuiz() {
+        this.quizModal.querySelector('[data-quiz-overlay]').classList.add('hidden');
+        this.quizModal.querySelector('[data-quiz-overlay]').classList.remove('flex');
+        document.body.style.overflow = '';
+      },
+
+      renderQuestion() {
+        const question = quizQuestions[this.currentQuestionIndex];
+        const content = this.quizModal.querySelector('.quiz-content');
+        this.updateProgress();
+
+        content.innerHTML = `
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">${question.category}</h3>
+          <p class="text-lg text-gray-700 mb-4">${question.question}</p>
+          <div class="space-y-3">
+            ${question.options.map(option => `
+              <label class="quiz-option flex items-center cursor-pointer border-2 border-gray-200 rounded-lg p-4 hover:border-purple-300 transition-all ${this.answers[question.id] === option.value ? 'selected' : ''}">
+                <input type="radio" name="${question.id}" value="${option.value}" class="h-5 w-5 text-purple-600 focus:ring-purple-500 border-gray-300 mr-4" ${this.answers[question.id] === option.value ? 'checked' : ''}>
+                <span class="font-semibold text-gray-900">${option.text}</span>
+              </label>
+            `).join('')}
+          </div>
+        `;
+        content.querySelectorAll('input[type="radio"]').forEach(input => {
+          input.addEventListener('change', (e) => {
+            this.selectAnswer(question.id, parseInt(e.target.value));
+          });
+        });
+      },
+
+      selectAnswer(questionId, value) {
+        this.answers[questionId] = value;
+        
+        const question = quizQuestions[this.currentQuestionIndex];
+        const content = this.quizModal.querySelector('.quiz-content');
+        const options = content.querySelectorAll(`input[name="${question.id}"]`);
+
+        options.forEach(input => {
+          const label = input.closest('.quiz-option');
+          if (parseInt(input.value) === value) {
+            label.classList.add('selected');
+          } else {
+            label.classList.remove('selected');
+          }
+        });
+
+        this.updateNavigation();
+      },
+
+       updateProgress() {
+         const progress = ((this.currentQuestionIndex + 1) / quizQuestions.length) * 100;
+         this.quizModal.querySelector('[data-quiz-progress]').style.width = `${progress}%`;
+         this.quizModal.querySelector('[data-quiz-counter]').textContent = `Question ${this.currentQuestionIndex + 1} of ${quizQuestions.length}`;
+      },
+      
+      updateNavigation() {
+        const nextBtn = this.quizModal.querySelector('[data-quiz-next]');
+        nextBtn.disabled = this.answers[quizQuestions[this.currentQuestionIndex].id] === undefined;
+        this.quizModal.querySelector('[data-quiz-prev]').disabled = this.currentQuestionIndex === 0;
+        nextBtn.textContent = (this.currentQuestionIndex === quizQuestions.length - 1) ? 'Get Results' : 'Next';
+      },
+
+      nextQuestion() {
+          if(this.currentQuestionIndex === quizQuestions.length - 1) {
+              this.showResults();
+              return;
+          }
+          this.currentQuestionIndex++;
+          this.renderQuestion();
+          this.updateNavigation();
+      },
+
+      previousQuestion(){
+          this.currentQuestionIndex--;
+          this.renderQuestion();
+          this.updateNavigation();
+      },
+
+      showResults() {
+        this.closeQuiz();
+        const scoreData = calculateScore(this.answers);
+        const recommendations = generateRecommendations(this.answers);
+        const content = this.resultsModal.querySelector('.results-content');
+        
+        content.innerHTML = `
+            <div class="score-summary ${scoreData.level.bgColor} ${scoreData.level.color} p-6 rounded-lg mb-6 text-center">
+              <div class="text-4xl font-bold mb-2">${scoreData.percentage}%</div>
+              <div class="text-xl font-semibold mb-2">${scoreData.level.level} Readiness</div>
+              <p class="text-sm">${scoreData.level.description}</p>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-xl font-semibold text-gray-900 mb-4">Recommendations</h3>
+              ${recommendations.map(rec => `<div class="p-4 border rounded-lg">${rec.suggestion}</div>`).join('') || '<p>No specific recommendations at this time.</p>'}
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+               <h4 class="font-semibold text-blue-900 mb-2">Next Steps</h4>
+               <p class="text-blue-700 text-sm">${scoreData.level.action}</p>
+            </div>
+        `;
+        
+        this.openResults();
+      },
+
+      openResults() {
+        this.resultsModal.querySelector('[data-results-overlay]').classList.remove('hidden');
+        this.resultsModal.querySelector('[data-results-overlay]').classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      },
+      
+      closeResults() {
+        this.resultsModal.querySelector('[data-results-overlay]').classList.add('hidden');
+        this.resultsModal.querySelector('[data-results-overlay]').classList.remove('flex');
+        document.body.style.overflow = '';
+      },
+
+      backToQuiz() {
+        this.closeResults();
+        this.openQuiz();
+      },
+
+      bookConsultation() {
+        window.location.href = '/contact-advanced';
+      }
+    };
+    
+    quizManager.init();
+  });
+</script>

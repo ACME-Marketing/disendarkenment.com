@@ -11,18 +11,30 @@ export const graphQLClient = new GraphQLClient(endpoint, {
   retry: 3, // Retry failed requests up to 3 times
 });
 
-// Enhanced request function with retry logic for build-time reliability
+// Enhanced request function with retry logic and detailed logging
 export async function requestWithRetry(query, variables = {}, maxRetries = 3) {
   let lastError;
+
+  console.log("Initiating GraphQL request...");
+  console.log("Query:", query);
+  if (variables && Object.keys(variables).length > 0) {
+    console.log("Variables:", JSON.stringify(variables, null, 2));
+  } else {
+    console.log("No variables for this query.");
+  }
   
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
       console.log(`GraphQL request attempt ${attempt}/${maxRetries}`);
       const result = await graphQLClient.request(query, variables);
-      console.log(`GraphQL request successful on attempt ${attempt}`);
+      console.log(`GraphQL request successful on attempt ${attempt}.`);
+      console.log("Received data:", JSON.stringify(result, null, 2));
       return result;
     } catch (error) {
       console.error(`GraphQL request failed on attempt ${attempt}:`, error.message);
+      if (error.response) {
+        console.error("GraphQL Response Error:", JSON.stringify(error.response, null, 2));
+      }
       lastError = error;
       
       if (attempt < maxRetries) {
@@ -34,6 +46,7 @@ export async function requestWithRetry(query, variables = {}, maxRetries = 3) {
     }
   }
   
+  console.error("GraphQL request failed after all retries.");
   throw lastError;
 }
 

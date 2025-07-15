@@ -21,14 +21,14 @@ const structuredData = {
 			<div class="max-w-4xl mx-auto text-center">
 				<h1 class="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
 				<p class="text-xl text-purple-100 mb-8">
-					Connect with our licensed facilitators through our intelligent contact system
+					Connect with our licensed facilitators through the contact form below. Someone will be in touch within 24 hours.	
 				</p>
 				<div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
 					<p class="text-purple-100 mb-4">
-						Our advanced contact form adapts to your needs and provides personalized guidance based on your inquiry type.
+						We will personalize guidance based on your input.
 					</p>
 					<p class="text-sm text-purple-200">
-						All communications are secure and confidential
+						All communications are confidential
 					</p>
 				</div>
 			</div>
@@ -42,6 +42,8 @@ const structuredData = {
 				<form id="advanced-contact-form" class="space-y-8" novalidate>
 					<!-- CSRF Token -->
 					<input type="hidden" name="csrf_token" id="csrf_token" value="">
+					<!-- Webhook URL -->
+					<input type="hidden" name="webhook_url" value="https://n8n.srv874889.hstgr.cloud/webhook-test/b82d974f-5b1f-4db9-b659-480578ceea88">
 					
 					<!-- Form Progress -->
 					<div class="bg-gray-50 rounded-lg p-6 mb-8">
@@ -290,11 +292,11 @@ const structuredData = {
 										</label>
 										<label class="flex items-center">
 											<input type="radio" name="contact_method" value="phone" class="mr-3">
-											<span class="text-gray-700">Phone call</span>
+											<span class="text-gray-700">Phone/Text</span>
 										</label>
 										<label class="flex items-center">
 											<input type="radio" name="contact_method" value="both" class="mr-3">
-											<span class="text-gray-700">Either email or phone</span>
+											<span class="text-gray-700">Either email or phone/text</span>
 										</label>
 									</div>
 								</div>
@@ -305,14 +307,14 @@ const structuredData = {
 											<input type="checkbox" name="newsletter" value="yes" class="mt-1 mr-3">
 											<div>
 												<span class="text-gray-700">Subscribe to our newsletter</span>
-												<p class="text-sm text-gray-500">Receive updates on psychedelic therapy research, resources, and insights</p>
+												<p class="text-sm text-gray-500">Receive updates on psychedelic journey research, resources, and insights</p>
 											</div>
 										</label>
 
 										<label class="flex items-start">
 											<input type="checkbox" name="privacy_consent" value="yes" required class="mt-1 mr-3">
 											<div>
-												<span class="text-gray-700">I consent to the processing of my personal data <span class="text-red-500">*</span></span>
+												<span class="text-gray-700">I consent to receiving phone/text communications from your staff. <span class="text-red-500">*</span></span>
 												<p class="text-sm text-gray-500">
 													By submitting this form, you agree to our 
 													<a href="/privacy" class="text-purple-600 hover:text-purple-800 underline">Privacy Policy</a> 
@@ -725,18 +727,40 @@ const structuredData = {
 		}
 
 		async function submitForm(formData: FormData): Promise<any> {
-			// Simulate form submission - in production, this would send to your backend
-			return new Promise((resolve) => {
-				setTimeout(() => {
-					// Simulate successful submission
-					resolve({
-						success: true,
-						inquiryType: formData.get('inquiry_type'),
-						firstName: formData.get('first_name'),
-						message: 'Form submitted successfully'
-					});
-				}, 2000);
-			});
+			// Convert FormData to a plain object
+			const data = Object.fromEntries(formData.entries());
+			console.log("Submitting form data:", JSON.stringify(data, null, 2));
+
+			try {
+				const response = await fetch('/.netlify/functions/consultation', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(data),
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json().catch(() => ({ message: 'An unknown error occurred.' }));
+					console.error('Server response not OK:', response.status, errorData);
+					throw new Error(errorData.error || `Request failed with status ${response.status}`);
+				}
+
+				const result = await response.json();
+				console.log("Received response from submission endpoint:", JSON.stringify(result, null, 2));
+				
+		              // The backend response just gives {success: true}, so we add the other fields for the frontend.
+				return {
+					...result, // Should be { success: true }
+					inquiryType: formData.get('inquiry_type'),
+					firstName: formData.get('first_name'),
+				};
+
+			} catch (error) {
+				console.error('Error submitting form:', error);
+				// The showError function is already called in the submit handler's catch block
+				throw error;
+			}
 		}
 
 		function generatePersonalizedResponse(response: any): string {
@@ -792,7 +816,7 @@ const structuredData = {
 					`;
 					break;
 				case 'emergency':
-					personalizedMessage = `Hi ${firstName}, we take urgent requests seriously and will prioritize your inquiry. If this is a mental health crisis, please also contact emergency services.`;
+					personalizedMessage = `Hi ${firstName}, If this is a mental health crisis, please contact emergency services immediately. We take your safety very seriously and want to ensure you get the help you need in a timely manner. We are not an emergency resource, but will attempt to follow up with you soon.`;
 					nextSteps = `
 						<h4 class="font-semibold text-red-900 mb-2">Immediate Actions:</h4>
 						<ul class="text-sm text-red-700 space-y-1">

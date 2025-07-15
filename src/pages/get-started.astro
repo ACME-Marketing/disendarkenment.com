@@ -383,6 +383,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									</label>
 								</div>
 								<div id="consent-error" class="text-red-500 text-sm hidden"></div>
+								<input type="hidden" name="webhook_url" value="https://n8n.srv874889.hstgr.cloud/webhook/b1fc5008-d10f-42f0-92aa-91d8a3806319">
 								<button
 									type="submit"
 									id="submit-btn"
@@ -477,21 +478,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({
-					form_type: 'consultation_booking',
-					timestamp: new Date().toISOString(),
-					data: {
-						name: formData.get('name'),
-						email: formData.get('email'),
-						phone: formData.get('phone'),
-						location: formData.get('location'),
-						age: formData.get('age'),
-						experience: formData.get('experience'),
-						preferred_time: formData.get('preferred-time'),
-						message: formData.get('message'),
-						consent: formData.get('consent')
-					}
-				})
+				body: JSON.stringify(Object.fromEntries(formData.entries()))
 			});
 			
 			const result = await response.json();
