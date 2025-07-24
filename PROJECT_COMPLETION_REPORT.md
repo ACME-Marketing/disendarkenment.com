@@ -300,7 +300,7 @@ disendarkenment.com/
 - **Astro Framework**: Modern static site generation
 - **Tailwind CSS**: Utility-first styling framework
 - **WordPress CMS**: Content management system integration
-- **Netlify**: Production hosting and deployment platform
+- **Render.com**: Production hosting and deployment platform
 
 ---
 

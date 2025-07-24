@@ -1,4 +1,5 @@
 ---
+export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
@@ -472,8 +473,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		showLoadingState();
 		
 		try {
-			// Submit to Netlify function which proxies to n8n webhook
-			const response = await fetch('/.netlify/functions/consultation', {
+			// Submit to n8n webhook directly
+			const webhookUrl = formData.get('webhook_url') as string;
+			formData.delete('webhook_url'); // Remove webhook_url from data sent to n8n
+			const response = await fetch(webhookUrl, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
