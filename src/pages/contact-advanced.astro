@@ -718,13 +718,6 @@ const structuredData = {
 			`;
 			
 			form?.insertBefore(errorDiv, form.firstChild);
-			
-			// Auto-remove after 5 seconds
-			setTimeout(() => {
-				if (errorDiv.parentNode) {
-					errorDiv.remove();
-				}
-			}, 5000);
 		}
 
 		async function submitForm(formData: FormData): Promise<any> {
@@ -847,4 +840,99 @@ const structuredData = {
 			`;
 		}
 	});
+
+	function closeSuccessModal() {
+		const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+		if (modal) {
+			modal.remove();
+		}
+		window.location.replace('/readiness-assessment');
+	}
+	
+	function closeErrorModal() {
+		const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+		if (modal) {
+			modal.remove();
+		}
+		window.location.replace('/readiness-assessment');
+	}
+	
+	// Add real-time validation
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('consultation-form');
+		if (!form) return;
+		
+		// Add input event listeners for real-time validation
+		const inputs = form.querySelectorAll('input, select, textarea');
+		inputs.forEach(input => {
+			input.addEventListener('blur', function() {
+				validateSingleField(this);
+			});
+			
+			input.addEventListener('input', function() {
+				// Clear error when user starts typing
+				const errorId = this.id + '-error';
+				const errorElement = document.getElementById(errorId);
+				if (errorElement && !errorElement.classList.contains('hidden')) {
+					errorElement.classList.add('hidden');
+					this.classList.remove('border-red-500');
+					this.classList.add('border-gray-300');
+				}
+			});
+		});
+		
+		// Age selection warning
+		const ageSelect = document.getElementById('age') as HTMLSelectElement;
+		if (ageSelect) {
+			ageSelect.addEventListener('change', function() {
+				if (this.value === '18-20') {
+					showError('age-error', 'You must be 21 or older to be eligible for our services');
+				}
+			});
+		}
+	});
+	
+	function validateSingleField(field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+		const fieldName = field.name;
+		const value = field.value.trim();
+		const errorId = field.id + '-error';
+		
+		// Clear previous error
+		const errorElement = document.getElementById(errorId);
+		if (errorElement) {
+			errorElement.classList.add('hidden');
+		}
+		field.classList.remove('border-red-500');
+		field.classList.add('border-gray-300');
+		
+		// Validate based on field type
+		switch (fieldName) {
+			case 'name':
+				if (value.length < 2) {
+					showError(errorId, 'Name must be at least 2 characters');
+				}
+				break;
+			case 'email':
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (value && !emailRegex.test(value)) {
+					showError(errorId, 'Please enter a valid email address');
+				}
+				break;
+			case 'phone':
+				if (value) {
+					const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+					const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
+					if (!phoneRegex.test(cleanPhone) || cleanPhone.length < 10) {
+						showError(errorId, 'Please enter a valid phone number');
+					}
+				}
+				break;
+		}
+	}
+	
+	// Make functions available globally
+	(window as any).handleConsultationBooking = handleConsultationBooking;
+	(window as any).closeSuccessModal = closeSuccessModal;
+	(window as any).closeErrorModal = closeErrorModal;
+</script>
 </script>

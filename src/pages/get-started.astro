@@ -657,11 +657,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		`;
 		
 		document.body.appendChild(modal);
-		
-		// Auto-close after 10 seconds
-		setTimeout(() => {
-			closeSuccessModal();
-		}, 10000);
 	}
 	
 	function closeSuccessModal() {
@@ -669,6 +664,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		if (modal) {
 			modal.remove();
 		}
+		window.location.replace('/readiness-assessment');
 	}
 	
 	function showErrorMessage(message: string) {
@@ -712,6 +708,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		if (modal) {
 			modal.remove();
 		}
+		window.location.replace('/readiness-assessment');
 	}
 	
 	// Add real-time validation
