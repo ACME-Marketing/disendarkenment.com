@@ -397,68 +397,76 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <script>
-	function openDownloadModal(resourceType) {
-		const resourceInput = document.getElementById('resourceType') as HTMLInputElement;
-		const modal = document.getElementById('downloadModal');
-		if (resourceInput) resourceInput.value = resourceType;
-		if (modal) {
-			modal.classList.remove('hidden');
-			modal.classList.add('flex');
-		}
-	}
-
-	function closeDownloadModal() {
-		const modal = document.getElementById('downloadModal');
-		if (modal) {
-			modal.classList.add('hidden');
-			modal.classList.remove('flex');
-		}
-	}
-
-	function handleResourceDownload(event) {
-		event.preventDefault();
-		const emailInput = document.getElementById('downloadEmail') as HTMLInputElement;
-		const resourceInput = document.getElementById('resourceType') as HTMLInputElement;
-		const email = emailInput?.value || '';
-		const resourceType = resourceInput?.value || '';
-		
-		// Here you would typically send this to your backend
-		console.log('Resource download request:', { email, resourceType });
-		
-		// Show success message
-		alert('Thank you! Your download link has been sent to your email.');
-		closeDownloadModal();
-	}
-
-	async function handleNewsletterSignup(event) {
-		event.preventDefault();
-		const emailInput = event.target.querySelector('input[type="email"]') as HTMLInputElement;
-		const email = emailInput?.value;
-		
-		if (!email) {
-			alert('Please enter a valid email address.');
-			return;
-		}
-		
-		try {
-			const response = await fetch('https://n8n.srv874889.hstgr.cloud/webhook-test/3987a953-945d-46d4-ab0e-87c9edb56a61', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email: email }),
-			});
-			
-			if (response.ok) {
-				alert('Thank you for subscribing! You\'ll receive updates about new resources.');
-				emailInput.value = ''; // Reset form
-			} else {
-				alert('There was an error subscribing. Please try again later.');
-				console.error('Newsletter signup failed:', response.status, await response.text());
+	document.addEventListener('DOMContentLoaded', function() {
+		function openDownloadModal(resourceType) {
+			const resourceInput = document.getElementById('resourceType') as HTMLInputElement;
+			const modal = document.getElementById('downloadModal');
+			if (resourceInput) resourceInput.value = resourceType;
+			if (modal) {
+				modal.classList.remove('hidden');
+				modal.classList.add('flex');
 			}
-		} catch (error) {
-			alert('Network error. Please check your connection and try again.');
-			console.error('Newsletter signup network error:', error);
 		}
-	}
+
+		function closeDownloadModal() {
+			const modal = document.getElementById('downloadModal');
+			if (modal) {
+				modal.classList.add('hidden');
+				modal.classList.remove('flex');
+			}
+		}
+
+		function handleResourceDownload(event) {
+			event.preventDefault();
+			const emailInput = document.getElementById('downloadEmail') as HTMLInputElement;
+			const resourceInput = document.getElementById('resourceType') as HTMLInputElement;
+			const email = emailInput?.value || '';
+			const resourceType = resourceInput?.value || '';
+			
+			// Here you would typically send this to your backend
+			console.log('Resource download request:', { email, resourceType });
+			
+			// Show success message
+			alert('Thank you! Your download link has been sent to your email.');
+			closeDownloadModal();
+		}
+
+		async function handleNewsletterSignup(event) {
+			event.preventDefault();
+			const emailInput = event.target.querySelector('input[type="email"]') as HTMLInputElement;
+			const email = emailInput?.value;
+			
+			if (!email) {
+				alert('Please enter a valid email address.');
+				return;
+			}
+			
+			try {
+				const response = await fetch('https://n8n.srv874889.hstgr.cloud/webhook-test/3987a953-945d-46d4-ab0e-87c9edb56a61', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({ email: email }),
+				});
+				
+				if (response.ok) {
+					alert('Thank you for subscribing! You\'ll receive updates about new resources.');
+					emailInput.value = ''; // Reset form
+				} else {
+					alert('There was an error subscribing. Please try again later.');
+					console.error('Newsletter signup failed:', response.status, await response.text());
+				}
+			} catch (error) {
+				alert('Network error. Please check your connection and try again.');
+				console.error('Newsletter signup network error:', error);
+			}
+		}
+
+		// Make functions available globally
+		(window as any).openDownloadModal = openDownloadModal;
+		(window as any).closeDownloadModal = closeDownloadModal;
+		(window as any).handleResourceDownload = handleResourceDownload;
+		(window as any).handleNewsletterSignup = handleNewsletterSignup;
+	});
 </script>
