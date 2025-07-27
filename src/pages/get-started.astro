@@ -270,6 +270,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 										type="text"
 										id="name"
 										name="name"
+										autocomplete="name"
 										required
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 										placeholder="Enter your full name"
@@ -282,6 +283,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 										type="email"
 										id="email"
 										name="email"
+										autocomplete="email"
 										required
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 										placeholder="your@email.com"
@@ -289,11 +291,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									<div id="email-error" class="text-red-500 text-sm mt-1 hidden"></div>
 								</div>
 								<div>
-									<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+									<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
 									<input
 										type="tel"
 										id="phone"
 										name="phone"
+										autocomplete="tel"
 										required
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 										placeholder="(555) 123-4567"
@@ -305,6 +308,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									<select
 										id="location"
 										name="location"
+										autocomplete="address-level1"
 										required
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 									>
@@ -320,6 +324,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									<select
 										id="age"
 										name="age"
+										autocomplete="off"
 										required
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 									>
@@ -338,6 +343,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									<select
 										id="experience"
 										name="experience"
+										autocomplete="off"
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 									>
 										<option value="">Select experience level</option>
@@ -352,6 +358,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 									<select
 										id="preferred-time"
 										name="preferred-time"
+										autocomplete="off"
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 									>
 										<option value="">Select preferred time</option>
@@ -367,6 +374,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 										id="message"
 										name="message"
 										rows="3"
+										autocomplete="off"
 										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
 										placeholder="Tell us briefly about your interest in psychedelic therapy, any specific goals, or questions you have..."
 									></textarea>
@@ -490,11 +498,55 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				// Hide loading state
 				hideLoadingState();
 				
-				// Show success message
-				showSuccessMessage();
+				// Redirect to scheduling page with form data
+				const params = new URLSearchParams();
 				
-				// Reset form
-				form.reset();
+				// Map form fields to expected parameters
+				const name = formData.get('name');
+				const email = formData.get('email'); 
+				const phone = formData.get('phone');
+				const location = formData.get('location');
+				const age = formData.get('age');
+				const experience = formData.get('experience');
+				const preferredTime = formData.get('preferred-time');
+				const message = formData.get('message');
+				
+				// Build comprehensive message with all form data
+				let fullMessage = '';
+				if (message) {
+					fullMessage += `${message}`;
+				}
+				
+				// Add the mapped parameters
+				if (name) params.append('name', name.toString());
+				if (email) params.append('email', email.toString());
+				if (phone) params.append('phone', phone.toString());
+				params.append('inquiry_type', 'consultation');
+				if (fullMessage.trim()) params.append('message', fullMessage.trim());
+				
+				// Debug: Log the URL being generated
+				const redirectUrl = `/schedule-consultation?${params.toString()}`;
+				console.log('Redirecting to:', redirectUrl);
+				console.log('Parameters:', {
+					name: name?.toString(),
+					email: email?.toString(), 
+					phone: phone?.toString(),
+					message: fullMessage.trim()
+				});
+				
+				// Store debug info in sessionStorage for persistence
+				sessionStorage.setItem('formDebug', JSON.stringify({
+					redirectUrl,
+					parameters: {
+						name: name?.toString(),
+						email: email?.toString(), 
+						phone: phone?.toString(),
+						message: fullMessage.trim()
+					}
+				}));
+				
+				// Redirect immediately
+				window.location.href = redirectUrl;
 			} else {
 				throw new Error(result.error || 'Failed to submit form');
 			}

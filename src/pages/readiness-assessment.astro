@@ -1,9 +1,27 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Check if coming from consultation booking
+const fromConsultation = Astro.url.searchParams.get('from') === 'consultation';
+const bookingConfirmed = Astro.url.searchParams.get('booked') === 'true';
 ---
 
 <BaseLayout title="Readiness Assessment - Disendarkenment" description="Comprehensive self-assessment questionnaire to evaluate your readiness for psychedelic journey facilitation and identify areas for preparation.">
+	{fromConsultation && bookingConfirmed && (
+		<div class="bg-gradient-to-r from-green-400 to-blue-500 text-white p-4 text-center shadow-lg">
+			<div class="container mx-auto flex items-center justify-center">
+				<svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+					<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+				</svg>
+				<div>
+					<p class="font-semibold">✓ Consultation Scheduled Successfully!</p>
+					<p class="text-sm opacity-90">Complete this assessment before your call to maximize our time together.</p>
+				</div>
+			</div>
+		</div>
+	)}
+
 	<!-- Hero Section -->
 	<section class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white py-16">
 		<div class="container mx-auto px-4">
@@ -535,6 +553,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 			// Calculate readiness score and generate recommendations
 			const assessment = calculateReadiness(responses);
+			
+			// Send assessment data to n8n
+			sendAssessmentToN8n(responses, assessment);
+			
 			displayResults(assessment);
 			
 			// Scroll to results
@@ -843,6 +865,165 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				return "You may benefit from psychedelic therapy, but significant preparation is needed. Focus on the recommendations and consider additional support before proceeding.";
 			} else {
 				return "Based on your responses, you may not be ready for psychedelic therapy at this time. Please address the concerns and recommendations, and consider retaking this assessment in the future.";
+			}
+		}
+
+		async function sendAssessmentToN8n(responses: Record<string, any>, assessment: any) {
+			try {
+				// Get consultation data from session storage
+				const consultationData = sessionStorage.getItem('consultationData');
+				let userData = {};
+				
+				if (consultationData) {
+					try {
+						userData = JSON.parse(consultationData);
+						console.log('Found consultation data:', userData);
+					} catch (error) {
+						console.log('Could not parse consultation data:', error);
+					}
+				} else {
+					console.log('No consultation data found in sessionStorage');
+				}
+
+				// Prepare the data payload for n8n
+				const assessmentData = {
+					// User identification
+					name: userData.name || responses.name || 'Unknown',
+					email: userData.email || responses.email || '',
+					phone: userData.phone || '',
+					
+					// Assessment metadata
+					assessment_completed_at: new Date().toISOString(),
+					consultation_booked: userData.consultation_booked || false,
+					booking_reference: userData.booking_reference || null,
+					inquiry_type: userData.inquiry_type || 'assessment',
+					
+					// Assessment results
+					score: assessment.score,
+					max_score: assessment.maxScore,
+					percentage: assessment.percentage,
+					readiness_level: assessment.readinessLevel,
+					
+					// Assessment insights
+					strengths: assessment.strengths,
+					concerns: assessment.concerns,
+					recommendations: assessment.recommendations,
+					
+					// Detailed responses (organized by category)
+					responses: {
+						mental_health: {
+							current_status: responses.mental_health,
+							history: responses.mental_history,
+							medication: responses.current_medication,
+							therapy_experience: responses.therapy_experience
+						},
+						intentions: {
+							goals: responses.goals,
+							clarity: responses.intention_clarity,
+							expectations: responses.expectations
+						},
+						support_system: {
+							emotional_support: responses.emotional_support,
+							trusted_person: responses.trusted_person,
+							integration_support: responses.integration_support
+						},
+						substance_use: {
+							alcohol: responses.alcohol_use,
+							cannabis: responses.cannabis_use,
+							other_substances: responses.other_substances,
+							addiction_history: responses.addiction_history
+						},
+						practical_considerations: {
+							travel_ability: responses.travel_ability,
+							financial_readiness: responses.financial_readiness,
+							time_commitment: responses.time_commitment,
+							legal_understanding: responses.legal_understanding
+						}
+					},
+					
+					// Raw responses for complete data capture
+					raw_responses: responses
+				};
+
+				// Send to n8n webhook
+				const webhookUrl = 'https://n8n.srv874889.hstgr.cloud/webhook-test/946f4958-e5c6-494b-88d7-9db659c0d921';
+				
+				const response = await fetch(webhookUrl, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(assessmentData)
+				});
+
+				if (response.ok) {
+					console.log('Assessment data sent to n8n successfully');
+					
+					// Clear consultation data from session storage after successful submission
+					sessionStorage.removeItem('consultationData');
+				} else {
+					console.error('Failed to send assessment data to n8n:', response.statusText);
+				}
+			} catch (error) {
+				console.error('Error sending assessment data to n8n:', error);
+				// Don't block the user experience if n8n fails
+			}
+		}
+
+		// Show consultation context if available
+		const consultationData = sessionStorage.getItem('consultationData');
+		if (consultationData) {
+			try {
+				const data = JSON.parse(consultationData);
+				
+				// Add a note about the consultation if booked
+				if (data.consultation_booked) {
+					const form = document.getElementById('readiness-form');
+					if (form) {
+						const consultationNote = document.createElement('div');
+						consultationNote.className = 'bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6';
+						consultationNote.innerHTML = `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								</svg>
+								<div>
+									<p class="text-blue-800 font-medium">Consultation Scheduled</p>
+									<p class="text-blue-700 text-sm mt-1">
+										Completing this assessment will help us prepare for your consultation and provide personalized guidance.
+									</p>
+									<p class="text-blue-600 text-xs mt-2">
+										<strong>Contact:</strong> ${data.name} (${data.email})
+									</p>
+								</div>
+							</div>
+						`;
+						form.insertBefore(consultationNote, form.firstChild);
+					}
+				} else {
+					// Show a note that they can still benefit from completing the assessment
+					const form = document.getElementById('readiness-form');
+					if (form && data.name) {
+						const welcomeNote = document.createElement('div');
+						welcomeNote.className = 'bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6';
+						welcomeNote.innerHTML = `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-purple-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								</svg>
+								<div>
+									<p class="text-purple-800 font-medium">Welcome, ${data.name}!</p>
+									<p class="text-purple-700 text-sm mt-1">
+										This assessment will help evaluate your readiness for psychedelic therapy.
+									</p>
+								</div>
+							</div>
+						`;
+						form.insertBefore(welcomeNote, form.firstChild);
+					}
+				}
+			} catch (error) {
+				console.log('Could not parse consultation data:', error);
 			}
 		}
 	});

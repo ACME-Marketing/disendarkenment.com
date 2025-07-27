@@ -691,15 +691,35 @@ const structuredData = {
 		}
 
 		function showSuccess(response: any) {
-			form?.classList.add('hidden');
-			loadingDiv?.classList.add('hidden');
-			successDiv?.classList.remove('hidden');
+			// Check if this is a consultation request
+			const inquiryType = new FormData(form).get('inquiry_type');
 			
-			// Generate personalized response
-			const personalizedResponse = generatePersonalizedResponse(response);
-			const responseDiv = document.getElementById('personalized-response');
-			if (responseDiv) {
-				responseDiv.innerHTML = personalizedResponse;
+						if (inquiryType === 'consultation') {
+				// Redirect to scheduling page with form data
+				const formData = new FormData(form);
+				const params = new URLSearchParams();
+				
+				// Only pass the necessary fields for the consultation form
+				const firstName = formData.get('first_name')?.toString() || '';
+				const lastName = formData.get('last_name')?.toString() || '';
+				params.append('name', `${firstName} ${lastName}`.trim());
+				params.append('email', formData.get('email')?.toString() || '');
+				params.append('phone', formData.get('phone')?.toString() || '');
+				params.append('message', formData.get('message')?.toString() || '');
+				
+				window.location.href = `/schedule-consultation?${params.toString()}`;
+			} else {
+				// Show standard success message for other inquiries
+				form?.classList.add('hidden');
+				loadingDiv?.classList.add('hidden');
+				successDiv?.classList.remove('hidden');
+				
+				// Generate personalized response
+				const personalizedResponse = generatePersonalizedResponse(response);
+				const responseDiv = document.getElementById('personalized-response');
+				if (responseDiv) {
+					responseDiv.innerHTML = personalizedResponse;
+				}
 			}
 		}
 
