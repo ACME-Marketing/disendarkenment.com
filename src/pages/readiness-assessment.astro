@@ -946,7 +946,7 @@ const bookingConfirmed = Astro.url.searchParams.get('booked') === 'true';
 				};
 
 				// Send to n8n webhook
-				const webhookUrl = 'https://n8n.srv874889.hstgr.cloud/webhook-test/946f4958-e5c6-494b-88d7-9db659c0d921';
+				const webhookUrl = 'https://n8n.srv874889.hstgr.cloud/webhook/946f4958-e5c6-494b-88d7-9db659c0d921';
 				
 				const response = await fetch(webhookUrl, {
 					method: 'POST',
