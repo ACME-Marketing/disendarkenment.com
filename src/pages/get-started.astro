@@ -12,9 +12,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				<p class="text-xl text-purple-100 mb-8">
 					Take the first step toward transformation with professional psychedelic journey facilitation
 				</p>
-				<a href="#consultation" class="bg-white text-purple-900 hover:bg-purple-50 font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block">
+				<button onclick="openConsultationModal()" class="bg-white text-purple-900 hover:bg-purple-50 font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block">
 					Schedule Free Consultation
-				</a>
+				</button>
 			</div>
 		</div>
 	</section>
@@ -35,7 +35,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 							Free 30-minute consultation to discuss your goals, assess eligibility, and answer questions about the process.
 						</p>
 						<div class="mt-4">
-							<a href="#consultation" class="text-purple-600 hover:text-purple-800 font-medium">Schedule Now →</a>
+							<button onclick="openConsultationModal()" class="text-purple-600 hover:text-purple-800 font-medium">Schedule Now →</button>
 						</div>
 					</div>
 
@@ -211,209 +211,210 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		</div>
 	</section>
 
-	<!-- Consultation Booking -->
-	<section id="consultation" class="py-16 bg-white">
-		<div class="container mx-auto px-4">
-			<div class="max-w-4xl mx-auto">
-				<h2 class="text-3xl font-bold text-gray-900 mb-12 text-center">Schedule Your Free Consultation</h2>
-				
-				<div class="bg-purple-50 p-8 rounded-lg">
-					<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-						<div>
-							<h3 class="text-2xl font-semibold text-gray-900 mb-6">What to Expect</h3>
-							<ul class="space-y-4">
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">30-minute confidential conversation</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">Discussion of your goals and intentions</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">Overview of our process and approach</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">Initial eligibility assessment</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">Answers to all your questions</span>
-								</li>
-								<li class="flex items-start">
-									<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-									</svg>
-									<span class="text-gray-700">Next steps if you decide to proceed</span>
-								</li>
-							</ul>
-						</div>
+	<!-- Consultation Modal -->
+	<div id="consultation-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+		<div class="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+			<div class="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+				<h2 class="text-2xl font-bold text-gray-900">Schedule Your Free Consultation</h2>
+				<button onclick="closeConsultationModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+			</div>
+			
+			<div class="p-6">
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+					<div>
+						<h3 class="text-xl font-semibold text-gray-900 mb-6">What to Expect</h3>
+						<ul class="space-y-4">
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">30-minute confidential conversation</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">Discussion of your goals and intentions</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">Overview of our process and approach</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">Initial eligibility assessment</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">Answers to all your questions</span>
+							</li>
+							<li class="flex items-start">
+								<svg class="w-5 h-5 text-purple-500 mr-3 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+								</svg>
+								<span class="text-gray-700">Next steps if you decide to proceed</span>
+							</li>
+						</ul>
+					</div>
 
-						<div class="bg-white p-6 rounded-lg shadow-lg">
-							<h3 class="text-xl font-semibold text-gray-900 mb-6">Book Your Consultation</h3>
-							<form id="consultation-form" class="space-y-4" onsubmit="handleConsultationBooking(event)">
-								<div>
-									<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
-									<input
-										type="text"
-										id="name"
-										name="name"
-										autocomplete="name"
-										required
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-										placeholder="Enter your full name"
-									>
-									<div id="name-error" class="text-red-500 text-sm mt-1 hidden"></div>
-								</div>
-								<div>
-									<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
-									<input
-										type="email"
-										id="email"
-										name="email"
-										autocomplete="email"
-										required
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-										placeholder="your@email.com"
-									>
-									<div id="email-error" class="text-red-500 text-sm mt-1 hidden"></div>
-								</div>
-								<div>
-									<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
-									<input
-										type="tel"
-										id="phone"
-										name="phone"
-										autocomplete="tel"
-										required
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-										placeholder="(555) 123-4567"
-									>
-									<div id="phone-error" class="text-red-500 text-sm mt-1 hidden"></div>
-								</div>
-								<div>
-									<label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location *</label>
-									<select
-										id="location"
-										name="location"
-										autocomplete="address-level1"
-										required
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-									>
-										<option value="">Select your state</option>
-										<option value="oregon">Oregon</option>
-										<option value="colorado">Colorado</option>
-										<option value="other">Other</option>
-									</select>
-									<div id="location-error" class="text-red-500 text-sm mt-1 hidden"></div>
-								</div>
-								<div>
-									<label for="age" class="block text-sm font-medium text-gray-700 mb-2">Age *</label>
-									<select
-										id="age"
-										name="age"
-										autocomplete="off"
-										required
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-									>
-										<option value="">Select age range</option>
-										<option value="18-20">18-20 (Not eligible - must be 21+)</option>
-										<option value="21-30">21-30</option>
-										<option value="31-40">31-40</option>
-										<option value="41-50">41-50</option>
-										<option value="51-60">51-60</option>
-										<option value="61+">61+</option>
-									</select>
-									<div id="age-error" class="text-red-500 text-sm mt-1 hidden"></div>
-								</div>
-								<div>
-									<label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Previous Psychedelic Experience</label>
-									<select
-										id="experience"
-										name="experience"
-										autocomplete="off"
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-									>
-										<option value="">Select experience level</option>
-										<option value="none">No previous experience</option>
-										<option value="minimal">Minimal (1-2 times)</option>
-										<option value="moderate">Moderate (several times)</option>
-										<option value="extensive">Extensive experience</option>
-									</select>
-								</div>
-								<div>
-									<label for="preferred-time" class="block text-sm font-medium text-gray-700 mb-2">Preferred Consultation Time</label>
-									<select
-										id="preferred-time"
-										name="preferred-time"
-										autocomplete="off"
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-									>
-										<option value="">Select preferred time</option>
-										<option value="morning">Morning (9 AM - 12 PM)</option>
-										<option value="afternoon">Afternoon (12 PM - 5 PM)</option>
-										<option value="evening">Evening (5 PM - 8 PM)</option>
-										<option value="flexible">I'm flexible</option>
-									</select>
-								</div>
-								<div>
-									<label for="message" class="block text-sm font-medium text-gray-700 mb-2">Brief Message (Optional)</label>
-									<textarea
-										id="message"
-										name="message"
-										rows="3"
-										autocomplete="off"
-										class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-										placeholder="Tell us briefly about your interest in psychedelic therapy, any specific goals, or questions you have..."
-									></textarea>
-								</div>
-								<div class="flex items-start">
-									<input
-										type="checkbox"
-										id="consent"
-										name="consent"
-										required
-										class="mt-1 mr-3"
-									>
-									<label for="consent" class="text-sm text-gray-600">
-										I understand this is a preliminary consultation and does not guarantee eligibility for services. I consent to being contacted about psychedelic therapy services. *
-									</label>
-								</div>
-								<div id="consent-error" class="text-red-500 text-sm hidden"></div>
-								<input type="hidden" name="webhook_url" value="https://n8n.srv874889.hstgr.cloud/webhook/b1fc5008-d10f-42f0-92aa-91d8a3806319">
-								<button
-									type="submit"
-									id="submit-btn"
-									class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center"
+					<div class="bg-purple-50 p-6 rounded-lg">
+						<h3 class="text-xl font-semibold text-gray-900 mb-6">Book Your Consultation</h3>
+						<form id="consultation-form" class="space-y-4" onsubmit="handleConsultationBooking(event)">
+							<div>
+								<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+								<input
+									type="text"
+									id="name"
+									name="name"
+									autocomplete="name"
+									required
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+									placeholder="Enter your full name"
 								>
-									<span id="submit-text">Schedule Free Consultation</span>
-									<svg id="loading-spinner" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-										<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-										<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-									</svg>
-								</button>
-							</form>
-							<p class="text-sm text-gray-600 mt-4 text-center">
-								We'll contact you within 24 hours to schedule your consultation.
-							</p>
-						</div>
+								<div id="name-error" class="text-red-500 text-sm mt-1 hidden"></div>
+							</div>
+							<div>
+								<label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+								<input
+									type="email"
+									id="email"
+									name="email"
+									autocomplete="email"
+									required
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+									placeholder="your@email.com"
+								>
+								<div id="email-error" class="text-red-500 text-sm mt-1 hidden"></div>
+							</div>
+							<div>
+								<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+								<input
+									type="tel"
+									id="phone"
+									name="phone"
+									autocomplete="tel"
+									required
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+									placeholder="(555) 123-4567"
+								>
+								<div id="phone-error" class="text-red-500 text-sm mt-1 hidden"></div>
+							</div>
+							<div>
+								<label for="location" class="block text-sm font-medium text-gray-700 mb-2">Location *</label>
+								<select
+									id="location"
+									name="location"
+									autocomplete="address-level1"
+									required
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+								>
+									<option value="">Select your state</option>
+									<option value="oregon">Oregon</option>
+									<option value="colorado">Colorado</option>
+									<option value="other">Other</option>
+								</select>
+								<div id="location-error" class="text-red-500 text-sm mt-1 hidden"></div>
+							</div>
+							<div>
+								<label for="age" class="block text-sm font-medium text-gray-700 mb-2">Age *</label>
+								<select
+									id="age"
+									name="age"
+									autocomplete="off"
+									required
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+								>
+									<option value="">Select age range</option>
+									<option value="18-20">18-20 (Not eligible - must be 21+)</option>
+									<option value="21-30">21-30</option>
+									<option value="31-40">31-40</option>
+									<option value="41-50">41-50</option>
+									<option value="51-60">51-60</option>
+									<option value="61+">61+</option>
+								</select>
+								<div id="age-error" class="text-red-500 text-sm mt-1 hidden"></div>
+							</div>
+							<div>
+								<label for="experience" class="block text-sm font-medium text-gray-700 mb-2">Previous Psychedelic Experience</label>
+								<select
+									id="experience"
+									name="experience"
+									autocomplete="off"
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+								>
+									<option value="">Select experience level</option>
+									<option value="none">No previous experience</option>
+									<option value="minimal">Minimal (1-2 times)</option>
+									<option value="moderate">Moderate (several times)</option>
+									<option value="extensive">Extensive experience</option>
+								</select>
+							</div>
+							<div>
+								<label for="preferred-time" class="block text-sm font-medium text-gray-700 mb-2">Preferred Consultation Time</label>
+								<select
+									id="preferred-time"
+									name="preferred-time"
+									autocomplete="off"
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+								>
+									<option value="">Select preferred time</option>
+									<option value="morning">Morning (9 AM - 12 PM)</option>
+									<option value="afternoon">Afternoon (12 PM - 5 PM)</option>
+									<option value="evening">Evening (5 PM - 8 PM)</option>
+									<option value="flexible">I'm flexible</option>
+								</select>
+							</div>
+							<div>
+								<label for="message" class="block text-sm font-medium text-gray-700 mb-2">Brief Message (Optional)</label>
+								<textarea
+									id="message"
+									name="message"
+									rows="3"
+									autocomplete="off"
+									class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+									placeholder="Tell us briefly about your interest in psychedelic therapy, any specific goals, or questions you have..."
+								></textarea>
+							</div>
+							<div class="flex items-start">
+								<input
+									type="checkbox"
+									id="consent"
+									name="consent"
+									required
+									class="mt-1 mr-3"
+								>
+								<label for="consent" class="text-sm text-gray-600">
+									I understand this is a preliminary consultation and does not guarantee eligibility for services. I consent to being contacted about psychedelic therapy services. *
+								</label>
+							</div>
+							<div id="consent-error" class="text-red-500 text-sm hidden"></div>
+							<input type="hidden" name="webhook_url" value="https://n8n.srv874889.hstgr.cloud/webhook/b1fc5008-d10f-42f0-92aa-91d8a3806319">
+							<button
+								type="submit"
+								id="submit-btn"
+								class="w-full bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center"
+							>
+								<span id="submit-text">Schedule Free Consultation</span>
+								<svg id="loading-spinner" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+									<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+									<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+								</svg>
+							</button>
+						</form>
+						<p class="text-sm text-gray-600 mt-4 text-center">
+							We'll contact you within 24 hours to schedule your consultation.
+						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-	</section>
+	</div>
 
 	<!-- FAQ Section -->
 	<section class="py-16 bg-gray-50">
@@ -836,8 +837,53 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		}
 	}
 	
+	// Modal control functions
+	function openConsultationModal() {
+		const modal = document.getElementById('consultation-modal');
+		if (modal) {
+			modal.classList.remove('hidden');
+			document.body.style.overflow = 'hidden'; // Prevent background scrolling
+		}
+	}
+	
+	function closeConsultationModal() {
+		const modal = document.getElementById('consultation-modal');
+		if (modal) {
+			modal.classList.add('hidden');
+			document.body.style.overflow = ''; // Restore scrolling
+			
+			// Clear form when closing
+			const form = document.getElementById('consultation-form') as HTMLFormElement;
+			if (form) {
+				form.reset();
+				clearErrors();
+			}
+		}
+	}
+	
+	// Close modal when clicking backdrop
+	document.addEventListener('DOMContentLoaded', function() {
+		const modal = document.getElementById('consultation-modal');
+		if (modal) {
+			modal.addEventListener('click', function(event) {
+				if (event.target === modal) {
+					closeConsultationModal();
+				}
+			});
+		}
+		
+		// Close modal with Escape key
+		document.addEventListener('keydown', function(event) {
+			if (event.key === 'Escape') {
+				closeConsultationModal();
+			}
+		});
+	});
+
 	// Make functions available globally
 	(window as any).handleConsultationBooking = handleConsultationBooking;
 	(window as any).closeSuccessModal = closeSuccessModal;
 	(window as any).closeErrorModal = closeErrorModal;
+	(window as any).openConsultationModal = openConsultationModal;
+	(window as any).closeConsultationModal = closeConsultationModal;
 </script>
