@@ -1,0 +1,1030 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Check if coming from consultation booking
+const fromConsultation = Astro.url.searchParams.get('from') === 'consultation';
+const bookingConfirmed = Astro.url.searchParams.get('booked') === 'true';
+---
+
+<BaseLayout title="Readiness Assessment - Disendarkenment" description="Comprehensive self-assessment questionnaire to evaluate your readiness for psychedelic journey facilitation and identify areas for preparation.">
+	{fromConsultation && bookingConfirmed && (
+		<div class="bg-gradient-to-r from-green-400 to-blue-500 text-white p-4 text-center shadow-lg">
+			<div class="container mx-auto flex items-center justify-center">
+				<svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20">
+					<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+				</svg>
+				<div>
+					<p class="font-semibold">✓ Consultation Scheduled Successfully!</p>
+					<p class="text-sm opacity-90">Complete this assessment before your call to maximize our time together.</p>
+				</div>
+			</div>
+		</div>
+	)}
+
+	<!-- Hero Section -->
+	<section class="bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white py-16">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6">Readiness Assessment</h1>
+				<p class="text-xl text-indigo-100 mb-8">
+					Evaluate your preparedness for a psychedelic journey and identify areas for focused preparation
+				</p>
+				<div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+					<p class="text-indigo-100 mb-4">
+						This comprehensive assessment covers mental health, intentions, support systems, and practical considerations to help determine your readiness.
+					</p>
+					<p class="text-sm text-indigo-200">
+						Estimated completion time: 10-15 minutes
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Assessment Form -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<form id="readiness-form" class="space-y-12">
+					<!-- Section 1: Mental Health & Stability -->
+					<div class="bg-blue-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+								<span class="text-blue-600 font-semibold">1</span>
+							</div>
+							Mental Health & Emotional Stability
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									How would you describe your current mental health status?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="mental_health" value="excellent" class="mr-3">
+										<span class="text-gray-700">Excellent - I feel mentally stable and resilient</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="mental_health" value="good" class="mr-3">
+										<span class="text-gray-700">Good - Generally stable with minor occasional challenges</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="mental_health" value="fair" class="mr-3">
+										<span class="text-gray-700">Fair - Some ongoing challenges but manageable</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="mental_health" value="poor" class="mr-3">
+										<span class="text-gray-700">Poor - Significant ongoing mental health challenges</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Do you have a history of any of the following? (Check all that apply)
+								</label>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-2">
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="psychosis" class="mr-3">
+										<span class="text-gray-700">Psychosis or psychotic episodes</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="bipolar" class="mr-3">
+										<span class="text-gray-700">Bipolar disorder</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="schizophrenia" class="mr-3">
+										<span class="text-gray-700">Schizophrenia</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="severe_depression" class="mr-3">
+										<span class="text-gray-700">Severe depression</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="panic_disorder" class="mr-3">
+										<span class="text-gray-700">Panic disorder</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="ptsd" class="mr-3">
+										<span class="text-gray-700">PTSD</span>
+									</label>
+									<label class="flex items-center">
+										<input type="checkbox" name="mental_history" value="none" class="mr-3">
+										<span class="text-gray-700">None of the above</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Are you currently taking any psychiatric medications?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="medications" value="none" class="mr-3">
+										<span class="text-gray-700">No medications</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="medications" value="stable" class="mr-3">
+										<span class="text-gray-700">Yes, stable on current medications for 3+ months</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="medications" value="recent_changes" class="mr-3">
+										<span class="text-gray-700">Yes, with recent changes in the last 3 months</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="medications" value="contraindicated" class="mr-3">
+										<span class="text-gray-700">Yes, taking MAOIs, lithium, or tramadol</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Section 2: Intentions & Motivations -->
+					<div class="bg-green-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+								<span class="text-green-600 font-semibold">2</span>
+							</div>
+							Intentions & Motivations
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									What is your primary motivation for pursuing psychedelic therapy?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="healing" class="mr-3">
+										<span class="text-gray-700">Healing from trauma or emotional wounds</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="depression" class="mr-3">
+										<span class="text-gray-700">Treatment for depression or anxiety</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="growth" class="mr-3">
+										<span class="text-gray-700">Personal growth and self-discovery</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="spiritual" class="mr-3">
+										<span class="text-gray-700">Spiritual exploration and connection</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="creativity" class="mr-3">
+										<span class="text-gray-700">Enhanced creativity and problem-solving</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="motivation" value="curiosity" class="mr-3">
+										<span class="text-gray-700">Curiosity about the experience</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									How clear are your intentions for this journey?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="intention_clarity" value="very_clear" class="mr-3">
+										<span class="text-gray-700">Very clear - I have specific, well-defined goals</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="intention_clarity" value="somewhat_clear" class="mr-3">
+										<span class="text-gray-700">Somewhat clear - I have general ideas but need refinement</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="intention_clarity" value="unclear" class="mr-3">
+										<span class="text-gray-700">Unclear - I'm still exploring what I want from this</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="intention_clarity" value="no_intentions" class="mr-3">
+										<span class="text-gray-700">No specific intentions - just curious to see what happens</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label for="specific_goals" class="block text-lg font-medium text-gray-900 mb-3">
+									Please describe your specific goals or what you hope to achieve (optional):
+								</label>
+								<textarea 
+									id="specific_goals" 
+									name="specific_goals" 
+									rows="4" 
+									class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+									placeholder="Share your hopes, goals, or areas you'd like to explore..."
+								></textarea>
+							</div>
+						</div>
+					</div>
+
+					<!-- Section 3: Support Systems -->
+					<div class="bg-purple-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							<div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+								<span class="text-purple-600 font-semibold">3</span>
+							</div>
+							Support Systems & Environment
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Do you have supportive people in your life who know about your interest in psychedelic therapy?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="support_system" value="very_supportive" class="mr-3">
+										<span class="text-gray-700">Yes, very supportive family/friends who understand</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="support_system" value="somewhat_supportive" class="mr-3">
+										<span class="text-gray-700">Some support, though not everyone understands</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="support_system" value="neutral" class="mr-3">
+										<span class="text-gray-700">Neutral - people in my life don't know or have no opinion</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="support_system" value="unsupportive" class="mr-3">
+										<span class="text-gray-700">Unsupportive - people in my life are against this</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="support_system" value="isolated" class="mr-3">
+										<span class="text-gray-700">I don't have close supportive relationships</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Do you have access to ongoing therapeutic or counseling support?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="therapy_support" value="current_therapist" class="mr-3">
+										<span class="text-gray-700">Yes, I have a current therapist/counselor</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="therapy_support" value="can_access" class="mr-3">
+										<span class="text-gray-700">I can easily access therapy if needed</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="therapy_support" value="limited_access" class="mr-3">
+										<span class="text-gray-700">Limited access due to cost or availability</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="therapy_support" value="no_access" class="mr-3">
+										<span class="text-gray-700">No access to professional therapeutic support</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									How stable is your current living situation?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="living_situation" value="very_stable" class="mr-3">
+										<span class="text-gray-700">Very stable - secure housing, income, relationships</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="living_situation" value="mostly_stable" class="mr-3">
+										<span class="text-gray-700">Mostly stable with minor uncertainties</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="living_situation" value="somewhat_unstable" class="mr-3">
+										<span class="text-gray-700">Somewhat unstable - some major stressors</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="living_situation" value="very_unstable" class="mr-3">
+										<span class="text-gray-700">Very unstable - major life changes or crises</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Section 4: Experience & Preparation -->
+					<div class="bg-yellow-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							<div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center mr-3">
+								<span class="text-yellow-600 font-semibold">4</span>
+							</div>
+							Experience & Preparation
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									What is your experience with psychedelics?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="psychedelic_experience" value="none" class="mr-3">
+										<span class="text-gray-700">No previous experience</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="psychedelic_experience" value="minimal" class="mr-3">
+										<span class="text-gray-700">Minimal experience (1-2 times, recreational)</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="psychedelic_experience" value="moderate" class="mr-3">
+										<span class="text-gray-700">Moderate experience (several times, various contexts)</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="psychedelic_experience" value="extensive" class="mr-3">
+										<span class="text-gray-700">Extensive experience (many times, therapeutic focus)</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Have you had any challenging or difficult psychedelic experiences?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="challenging_experiences" value="none" class="mr-3">
+										<span class="text-gray-700">No challenging experiences</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="challenging_experiences" value="mild" class="mr-3">
+										<span class="text-gray-700">Mild challenges that I handled well</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="challenging_experiences" value="moderate" class="mr-3">
+										<span class="text-gray-700">Moderate challenges that were difficult but manageable</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="challenging_experiences" value="severe" class="mr-3">
+										<span class="text-gray-700">Severe challenges that were traumatic or overwhelming</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="challenging_experiences" value="no_experience" class="mr-3">
+										<span class="text-gray-700">No previous psychedelic experience</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									How much preparation time can you dedicate before your journey?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="preparation_time" value="extensive" class="mr-3">
+										<span class="text-gray-700">2+ months of dedicated preparation</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="preparation_time" value="adequate" class="mr-3">
+										<span class="text-gray-700">1-2 months of preparation</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="preparation_time" value="limited" class="mr-3">
+										<span class="text-gray-700">2-4 weeks of preparation</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="preparation_time" value="minimal" class="mr-3">
+										<span class="text-gray-700">Less than 2 weeks available</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Section 5: Practical Considerations -->
+					<div class="bg-red-50 rounded-lg p-8">
+						<h2 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+							<div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center mr-3">
+								<span class="text-red-600 font-semibold">5</span>
+							</div>
+							Practical Considerations
+						</h2>
+						
+						<div class="space-y-6">
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Can you commit to the full process including preparation and integration?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="commitment" value="full" class="mr-3">
+										<span class="text-gray-700">Yes, I can fully commit to the entire process</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="commitment" value="mostly" class="mr-3">
+										<span class="text-gray-700">Mostly, with some scheduling flexibility needed</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="commitment" value="limited" class="mr-3">
+										<span class="text-gray-700">Limited availability due to work/life constraints</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="commitment" value="uncertain" class="mr-3">
+										<span class="text-gray-700">Uncertain about time commitment</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									Are you able to travel to Oregon or Colorado for legal psilocybin therapy?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="travel_ability" value="yes_easily" class="mr-3">
+										<span class="text-gray-700">Yes, I can easily travel to either location</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="travel_ability" value="yes_with_planning" class="mr-3">
+										<span class="text-gray-700">Yes, with some planning and arrangement</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="travel_ability" value="difficult" class="mr-3">
+										<span class="text-gray-700">Difficult but possible with significant planning</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="travel_ability" value="unable" class="mr-3">
+										<span class="text-gray-700">Unable to travel at this time</span>
+									</label>
+								</div>
+							</div>
+
+							<div>
+								<label class="block text-lg font-medium text-gray-900 mb-3">
+									How do you feel about the financial investment required?
+								</label>
+								<div class="space-y-2">
+									<label class="flex items-center">
+										<input type="radio" name="financial_readiness" value="comfortable" class="mr-3">
+										<span class="text-gray-700">Comfortable with the investment</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="financial_readiness" value="manageable" class="mr-3">
+										<span class="text-gray-700">Manageable with budgeting/payment plan</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="financial_readiness" value="stretch" class="mr-3">
+										<span class="text-gray-700">A significant stretch but worth it</span>
+									</label>
+									<label class="flex items-center">
+										<input type="radio" name="financial_readiness" value="barrier" class="mr-3">
+										<span class="text-gray-700">Financial cost is a major barrier</span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Submit Button -->
+					<div class="text-center">
+						<button 
+							type="submit" 
+							class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 inline-flex items-center"
+						>
+							<svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+							</svg>
+							Complete Assessment
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<!-- Results Section (Initially Hidden) -->
+	<section id="results-section" class="py-16 bg-gray-50 hidden">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<div class="bg-white rounded-lg shadow-lg p-8">
+					<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">Your Readiness Assessment Results</h2>
+					
+					<div id="results-content" class="space-y-6">
+						<!-- Results will be populated by JavaScript -->
+					</div>
+
+					<div class="mt-8 text-center">
+						<a href="/get-started" class="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 inline-block mr-4">
+							Schedule Consultation
+						</a>
+						<a href="/resources" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 inline-block">
+							Explore Resources
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('readiness-form');
+		const resultsSection = document.getElementById('results-section');
+		const resultsContent = document.getElementById('results-content');
+
+		form?.addEventListener('submit', function(e) {
+			e.preventDefault();
+			
+			const formData = new FormData(form as HTMLFormElement);
+			const responses = {};
+			
+			// Collect all form responses
+			for (let [key, value] of formData.entries()) {
+				if (responses[key]) {
+					if (Array.isArray(responses[key])) {
+						responses[key].push(value);
+					} else {
+						responses[key] = [responses[key], value];
+					}
+				} else {
+					responses[key] = value;
+				}
+			}
+
+			// Calculate readiness score and generate recommendations
+			const assessment = calculateReadiness(responses);
+			
+			// Send assessment data to n8n
+			sendAssessmentToN8n(responses, assessment);
+			
+			displayResults(assessment);
+			
+			// Scroll to results
+			resultsSection?.scrollIntoView({ behavior: 'smooth' });
+		});
+
+		function calculateReadiness(responses: Record<string, any>) {
+			let score = 0;
+			let maxScore = 0;
+			const concerns: string[] = [];
+			const strengths: string[] = [];
+			const recommendations: string[] = [];
+
+			// Mental Health Assessment (25 points)
+			maxScore += 25;
+			if (responses.mental_health === 'excellent') {
+				score += 25;
+				strengths.push('Excellent mental health stability');
+			} else if (responses.mental_health === 'good') {
+				score += 20;
+				strengths.push('Good mental health foundation');
+			} else if (responses.mental_health === 'fair') {
+				score += 10;
+				concerns.push('Some mental health challenges present');
+				recommendations.push('Consider additional therapeutic support before proceeding');
+			} else {
+				concerns.push('Significant mental health challenges');
+				recommendations.push('Professional mental health treatment recommended before psychedelic therapy');
+			}
+
+			// Check for contraindications
+			if (responses.mental_history && Array.isArray(responses.mental_history)) {
+				const contraindications = ['psychosis', 'bipolar', 'schizophrenia'];
+				const hasContraindications = responses.mental_history.some((item: string) => contraindications.includes(item));
+				if (hasContraindications) {
+					score -= 20;
+					concerns.push('History of conditions that may contraindicate psychedelic therapy');
+					recommendations.push('Comprehensive psychiatric evaluation required');
+				}
+			}
+
+			// Medication Assessment
+			if (responses.medications === 'contraindicated') {
+				score -= 25;
+				concerns.push('Currently taking medications that contraindicate psychedelic therapy');
+				recommendations.push('Medication review with prescribing physician required');
+			} else if (responses.medications === 'stable') {
+				score += 5;
+				strengths.push('Stable medication regimen');
+			}
+
+			// Intentions Assessment (20 points)
+			maxScore += 20;
+			if (responses.intention_clarity === 'very_clear') {
+				score += 20;
+				strengths.push('Clear, well-defined intentions');
+			} else if (responses.intention_clarity === 'somewhat_clear') {
+				score += 15;
+				recommendations.push('Spend more time clarifying and refining your intentions');
+			} else if (responses.intention_clarity === 'unclear') {
+				score += 8;
+				concerns.push('Unclear intentions for the journey');
+				recommendations.push('Intention-setting work strongly recommended before proceeding');
+			} else {
+				score += 3;
+				concerns.push('Lack of specific intentions');
+				recommendations.push('Develop clear intentions through preparation work');
+			}
+
+			// Support System Assessment (20 points)
+			maxScore += 20;
+			if (responses.support_system === 'very_supportive') {
+				score += 20;
+				strengths.push('Strong, supportive social network');
+			} else if (responses.support_system === 'somewhat_supportive') {
+				score += 15;
+				strengths.push('Adequate support system');
+			} else if (responses.support_system === 'neutral') {
+				score += 10;
+				recommendations.push('Consider building more supportive relationships');
+			} else {
+				score += 5;
+				concerns.push('Limited or unsupportive social environment');
+				recommendations.push('Building support network is crucial before proceeding');
+			}
+
+			// Therapy Support
+			if (responses.therapy_support === 'current_therapist') {
+				score += 10;
+				strengths.push('Access to ongoing therapeutic support');
+			} else if (responses.therapy_support === 'no_access') {
+				concerns.push('Limited access to professional therapeutic support');
+				recommendations.push('Establish therapeutic support before and after journey');
+			}
+
+			// Living Situation Assessment (15 points)
+			maxScore += 15;
+			if (responses.living_situation === 'very_stable') {
+				score += 15;
+				strengths.push('Very stable living situation');
+			} else if (responses.living_situation === 'mostly_stable') {
+				score += 12;
+				strengths.push('Mostly stable living situation');
+			} else if (responses.living_situation === 'somewhat_unstable') {
+				score += 6;
+				concerns.push('Some instability in living situation');
+				recommendations.push('Address major life stressors before proceeding');
+			} else {
+				score += 2;
+				concerns.push('Very unstable living situation');
+				recommendations.push('Stabilize living situation before psychedelic therapy');
+			}
+
+			// Experience Assessment (10 points)
+			maxScore += 10;
+			if (responses.psychedelic_experience === 'extensive') {
+				score += 10;
+				strengths.push('Extensive psychedelic experience');
+			} else if (responses.psychedelic_experience === 'moderate') {
+				score += 8;
+				strengths.push('Good psychedelic experience foundation');
+			} else if (responses.psychedelic_experience === 'minimal') {
+				score += 5;
+				recommendations.push('Additional preparation recommended for new users');
+			} else {
+				score += 3;
+				recommendations.push('Comprehensive preparation essential for first-time users');
+			}
+
+			// Challenging Experience Assessment
+			if (responses.challenging_experiences === 'severe') {
+				score -= 10;
+				concerns.push('History of severe challenging psychedelic experiences');
+				recommendations.push('Additional preparation and support for managing difficult experiences');
+			} else if (responses.challenging_experiences === 'moderate') {
+				recommendations.push('Review past challenging experiences and develop coping strategies');
+			}
+
+			// Preparation Time Assessment (10 points)
+			maxScore += 10;
+			if (responses.preparation_time === 'extensive') {
+				score += 10;
+				strengths.push('Ample time for thorough preparation');
+			} else if (responses.preparation_time === 'adequate') {
+				score += 8;
+				strengths.push('Adequate preparation time available');
+			} else if (responses.preparation_time === 'limited') {
+				score += 5;
+				concerns.push('Limited preparation time');
+				recommendations.push('Focus on essential preparation elements');
+			} else {
+				score += 2;
+				concerns.push('Minimal preparation time available');
+				recommendations.push('Consider delaying until more preparation time is available');
+			}
+
+			// Commitment Assessment
+			if (responses.commitment === 'full') {
+				score += 5;
+				strengths.push('Full commitment to the process');
+			} else if (responses.commitment === 'uncertain') {
+				concerns.push('Uncertain about time commitment');
+				recommendations.push('Clarify availability and commitment before proceeding');
+			}
+
+			// Travel and Financial Assessment
+			if (responses.travel_ability === 'unable') {
+				concerns.push('Unable to travel to legal jurisdictions');
+				recommendations.push('Consider waiting until travel is possible');
+			}
+
+			if (responses.financial_readiness === 'barrier') {
+				concerns.push('Financial cost is a major barrier');
+				recommendations.push('Explore payment options or consider waiting until financially ready');
+			}
+
+			// Calculate percentage
+			const percentage = Math.round((score / maxScore) * 100);
+
+			return {
+				score,
+				maxScore,
+				percentage,
+				concerns,
+				strengths,
+				recommendations,
+				readinessLevel: getReadinessLevel(percentage)
+			};
+		}
+
+		function getReadinessLevel(percentage: number): string {
+			if (percentage >= 80) return 'High Readiness';
+			if (percentage >= 60) return 'Moderate Readiness';
+			if (percentage >= 40) return 'Low Readiness';
+			return 'Not Ready';
+		}
+
+		function displayResults(assessment: any) {
+			if (!resultsContent) return;
+
+			const { percentage, readinessLevel, strengths, concerns, recommendations } = assessment;
+
+			let readinessColor = 'text-green-600';
+			let readinessBg = 'bg-green-100';
+			
+			if (percentage < 40) {
+				readinessColor = 'text-red-600';
+				readinessBg = 'bg-red-100';
+			} else if (percentage < 60) {
+				readinessColor = 'text-yellow-600';
+				readinessBg = 'bg-yellow-100';
+			} else if (percentage < 80) {
+				readinessColor = 'text-blue-600';
+				readinessBg = 'bg-blue-100';
+			}
+
+			resultsContent.innerHTML = `
+				<div class="text-center mb-8">
+					<div class="inline-flex items-center justify-center w-24 h-24 ${readinessBg} rounded-full mb-4">
+						<span class="text-3xl font-bold ${readinessColor}">${percentage}%</span>
+					</div>
+					<h3 class="text-2xl font-bold ${readinessColor} mb-2">${readinessLevel}</h3>
+					<p class="text-gray-600">Based on your responses, here's your readiness assessment</p>
+				</div>
+
+				${strengths.length > 0 ? `
+					<div class="mb-6">
+						<h4 class="text-xl font-semibold text-green-700 mb-3 flex items-center">
+							<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+							</svg>
+							Your Strengths
+						</h4>
+						<ul class="space-y-2">
+							${strengths.map((strength: string) => `
+								<li class="flex items-start">
+									<svg class="w-4 h-4 text-green-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+									</svg>
+									<span class="text-gray-700">${strength}</span>
+								</li>
+							`).join('')}
+						</ul>
+					</div>
+				` : ''}
+
+				${concerns.length > 0 ? `
+					<div class="mb-6">
+						<h4 class="text-xl font-semibold text-yellow-700 mb-3 flex items-center">
+							<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+							</svg>
+							Areas of Concern
+						</h4>
+						<ul class="space-y-2">
+							${concerns.map((concern: string) => `
+								<li class="flex items-start">
+									<svg class="w-4 h-4 text-yellow-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+									</svg>
+									<span class="text-gray-700">${concern}</span>
+								</li>
+							`).join('')}
+						</ul>
+					</div>
+				` : ''}
+
+				${recommendations.length > 0 ? `
+					<div class="mb-6">
+						<h4 class="text-xl font-semibold text-blue-700 mb-3 flex items-center">
+							<svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+								<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+							</svg>
+							Recommendations
+						</h4>
+						<ul class="space-y-2">
+							${recommendations.map((rec: string) => `
+								<li class="flex items-start">
+									<svg class="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+									</svg>
+									<span class="text-gray-700">${rec}</span>
+								</li>
+							`).join('')}
+						</ul>
+					</div>
+				` : ''}
+
+				<div class="bg-gray-50 rounded-lg p-6 mt-8">
+					<h4 class="text-lg font-semibold text-gray-900 mb-3">Next Steps</h4>
+					<p class="text-gray-700 mb-4">
+						${getNextStepsMessage(percentage)}
+					</p>
+				</div>
+			`;
+
+			resultsSection?.classList.remove('hidden');
+		}
+
+		function getNextStepsMessage(percentage: number): string {
+			if (percentage >= 80) {
+				return "You appear well-prepared for psychedelic therapy. Consider scheduling a consultation to discuss your specific goals and create a personalized treatment plan.";
+			} else if (percentage >= 60) {
+				return "You have a good foundation for psychedelic therapy. Address the areas of concern and follow the recommendations to optimize your readiness.";
+			} else if (percentage >= 40) {
+				return "You may benefit from psychedelic therapy, but significant preparation is needed. Focus on the recommendations and consider additional support before proceeding.";
+			} else {
+				return "Based on your responses, you may not be ready for psychedelic therapy at this time. Please address the concerns and recommendations, and consider retaking this assessment in the future.";
+			}
+		}
+
+		async function sendAssessmentToN8n(responses: Record<string, any>, assessment: any) {
+			try {
+				// Get consultation data from session storage
+				const consultationData = sessionStorage.getItem('consultationData');
+				let userData = {};
+				
+				if (consultationData) {
+					try {
+						userData = JSON.parse(consultationData);
+						console.log('Found consultation data:', userData);
+					} catch (error) {
+						console.log('Could not parse consultation data:', error);
+					}
+				} else {
+					console.log('No consultation data found in sessionStorage');
+				}
+
+				// Prepare the data payload for n8n
+				const assessmentData = {
+					// User identification
+					name: userData.name || responses.name || 'Unknown',
+					email: userData.email || responses.email || '',
+					phone: userData.phone || '',
+					
+					// Assessment metadata
+					assessment_completed_at: new Date().toISOString(),
+					consultation_booked: userData.consultation_booked || false,
+					booking_reference: userData.booking_reference || null,
+					inquiry_type: userData.inquiry_type || 'assessment',
+					
+					// Assessment results
+					score: assessment.score,
+					max_score: assessment.maxScore,
+					percentage: assessment.percentage,
+					readiness_level: assessment.readinessLevel,
+					
+					// Assessment insights
+					strengths: assessment.strengths,
+					concerns: assessment.concerns,
+					recommendations: assessment.recommendations,
+					
+					// Detailed responses (organized by category)
+					responses: {
+						mental_health: {
+							current_status: responses.mental_health,
+							history: responses.mental_history,
+							medication: responses.current_medication,
+							therapy_experience: responses.therapy_experience
+						},
+						intentions: {
+							goals: responses.goals,
+							clarity: responses.intention_clarity,
+							expectations: responses.expectations
+						},
+						support_system: {
+							emotional_support: responses.emotional_support,
+							trusted_person: responses.trusted_person,
+							integration_support: responses.integration_support
+						},
+						substance_use: {
+							alcohol: responses.alcohol_use,
+							cannabis: responses.cannabis_use,
+							other_substances: responses.other_substances,
+							addiction_history: responses.addiction_history
+						},
+						practical_considerations: {
+							travel_ability: responses.travel_ability,
+							financial_readiness: responses.financial_readiness,
+							time_commitment: responses.time_commitment,
+							legal_understanding: responses.legal_understanding
+						}
+					},
+					
+					// Raw responses for complete data capture
+					raw_responses: responses
+				};
+
+				// Send to n8n webhook
+				const webhookUrl = 'https://n8n.srv874889.hstgr.cloud/webhook/946f4958-e5c6-494b-88d7-9db659c0d921';
+				
+				const response = await fetch(webhookUrl, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(assessmentData)
+				});
+
+				if (response.ok) {
+					console.log('Assessment data sent to n8n successfully');
+					
+					// Clear consultation data from session storage after successful submission
+					sessionStorage.removeItem('consultationData');
+				} else {
+					console.error('Failed to send assessment data to n8n:', response.statusText);
+				}
+			} catch (error) {
+				console.error('Error sending assessment data to n8n:', error);
+				// Don't block the user experience if n8n fails
+			}
+		}
+
+		// Show consultation context if available
+		const consultationData = sessionStorage.getItem('consultationData');
+		if (consultationData) {
+			try {
+				const data = JSON.parse(consultationData);
+				
+				// Add a note about the consultation if booked
+				if (data.consultation_booked) {
+					const form = document.getElementById('readiness-form');
+					if (form) {
+						const consultationNote = document.createElement('div');
+						consultationNote.className = 'bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6';
+						consultationNote.innerHTML = `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								</svg>
+								<div>
+									<p class="text-blue-800 font-medium">Consultation Scheduled</p>
+									<p class="text-blue-700 text-sm mt-1">
+										Completing this assessment will help us prepare for your consultation and provide personalized guidance.
+									</p>
+									<p class="text-blue-600 text-xs mt-2">
+										<strong>Contact:</strong> ${data.name} (${data.email})
+									</p>
+								</div>
+							</div>
+						`;
+						form.insertBefore(consultationNote, form.firstChild);
+					}
+				} else {
+					// Show a note that they can still benefit from completing the assessment
+					const form = document.getElementById('readiness-form');
+					if (form && data.name) {
+						const welcomeNote = document.createElement('div');
+						welcomeNote.className = 'bg-purple-50 border border-purple-200 rounded-lg p-4 mb-6';
+						welcomeNote.innerHTML = `
+							<div class="flex items-start">
+								<svg class="w-5 h-5 text-purple-600 mt-0.5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+								</svg>
+								<div>
+									<p class="text-purple-800 font-medium">Welcome, ${data.name}!</p>
+									<p class="text-purple-700 text-sm mt-1">
+										This assessment will help evaluate your readiness for psychedelic therapy.
+									</p>
+								</div>
+							</div>
+						`;
+						form.insertBefore(welcomeNote, form.firstChild);
+					}
+				}
+			} catch (error) {
+				console.log('Could not parse consultation data:', error);
+			}
+		}
+	});
+</script>

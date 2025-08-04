@@ -1,0 +1,958 @@
+---
+export const prerender = true;
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const structuredData = {
+	"@context": "https://schema.org",
+	"@type": "ContactPage",
+	"name": "Contact Disendarkenment",
+	"description": "Get in touch with our licensed psychedelic journey facilitators",
+	"url": "https://disendarkenment.com/contact-advanced"
+};
+---
+
+<BaseLayout 
+	title="Advanced Contact Form - Disendarkenment" 
+	description="Connect with our licensed psychedelic journey facilitators through our secure, intelligent contact form with personalized recommendations."
+	structuredData={structuredData}
+>
+	<!-- Hero Section -->
+	<section class="bg-gradient-to-br from-purple-900 via-indigo-900 to-blue-900 text-white py-16">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto text-center">
+				<h1 class="text-4xl md:text-5xl font-bold mb-6">Get in Touch</h1>
+				<p class="text-xl text-purple-100 mb-8">
+					Connect with our licensed facilitators through the contact form below. Someone will be in touch within 24 hours.	
+				</p>
+				<div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl mx-auto">
+					<p class="text-purple-100 mb-4">
+						We will personalize guidance based on your input.
+					</p>
+					<p class="text-sm text-purple-200">
+						All communications are confidential
+					</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Contact Form -->
+	<section class="py-16 bg-white">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto">
+				<form id="advanced-contact-form" class="space-y-8" novalidate>
+					<!-- CSRF Token -->
+					<input type="hidden" name="csrf_token" id="csrf_token" value="">
+					<!-- Webhook URL -->
+					<input type="hidden" name="webhook_url" value="https://n8n.srv874889.hstgr.cloud/webhook/b1fc5008-d10f-42f0-92aa-91d8a3806319">
+					
+					<!-- Form Progress -->
+					<div class="bg-gray-50 rounded-lg p-6 mb-8">
+						<div class="flex items-center justify-between mb-4">
+							<h2 class="text-lg font-semibold text-gray-900">Contact Form Progress</h2>
+							<span id="form-progress-text" class="text-sm text-gray-600">Step 1 of 3</span>
+						</div>
+						<div class="w-full bg-gray-200 rounded-full h-2">
+							<div id="form-progress-bar" class="bg-purple-600 h-2 rounded-full transition-all duration-300" style="width: 33.33%"></div>
+						</div>
+					</div>
+
+					<!-- Step 1: Contact Information -->
+					<div class="form-step active" data-step="1">
+						<div class="bg-blue-50 rounded-lg p-8">
+							<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+								<div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+									<span class="text-blue-600 font-semibold">1</span>
+								</div>
+								Your Information
+							</h3>
+
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">
+										First Name <span class="text-red-500">*</span>
+									</label>
+									<input 
+										type="text" 
+										id="first_name" 
+										name="first_name" 
+										required 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										placeholder="Enter your first name"
+									>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+
+								<div>
+									<label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">
+										Last Name <span class="text-red-500">*</span>
+									</label>
+									<input 
+										type="text" 
+										id="last_name" 
+										name="last_name" 
+										required 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										placeholder="Enter your last name"
+									>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+
+								<div>
+									<label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+										Email Address <span class="text-red-500">*</span>
+									</label>
+									<input 
+										type="email" 
+										id="email" 
+										name="email" 
+										required 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										placeholder="your.email@example.com"
+									>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+
+								<div>
+									<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
+										Phone Number
+									</label>
+									<input 
+										type="tel" 
+										id="phone" 
+										name="phone" 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+										placeholder="(555) 123-4567"
+									>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+
+								<div class="md:col-span-2">
+									<label for="location" class="block text-sm font-medium text-gray-700 mb-2">
+										Location <span class="text-red-500">*</span>
+									</label>
+									<select 
+										id="location" 
+										name="location" 
+										required 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+									>
+										<option value="">Select your location</option>
+										<option value="oregon">Oregon</option>
+										<option value="colorado">Colorado</option>
+										<option value="other">Other</option>
+									</select>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Step 2: Inquiry Type & Details -->
+					<div class="form-step" data-step="2">
+						<div class="bg-green-50 rounded-lg p-8">
+							<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+								<div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+									<span class="text-green-600 font-semibold">2</span>
+								</div>
+								Your Inquiry
+							</h3>
+
+							<div class="space-y-6">
+								<div>
+									<label class="block text-sm font-medium text-gray-700 mb-4">
+										What type of inquiry is this? <span class="text-red-500">*</span>
+									</label>
+									<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="consultation" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Initial Consultation</span>
+												<p class="text-sm text-gray-600">Schedule a consultation to discuss your needs</p>
+											</div>
+										</label>
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="assessment" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Readiness Assessment</span>
+												<p class="text-sm text-gray-600">Questions about the assessment process</p>
+											</div>
+										</label>
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="services" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Service Information</span>
+												<p class="text-sm text-gray-600">Learn more about our services and packages</p>
+											</div>
+										</label>
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="support" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Ongoing Support</span>
+												<p class="text-sm text-gray-600">Integration or follow-up support</p>
+											</div>
+										</label>
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="emergency" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Urgent Support</span>
+												<p class="text-sm text-gray-600">Need immediate assistance or crisis support</p>
+											</div>
+										</label>
+										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+											<input type="radio" name="inquiry_type" value="other" class="mt-1 mr-3" required>
+											<div>
+												<span class="font-medium text-gray-900">Other</span>
+												<p class="text-sm text-gray-600">General questions or other inquiries</p>
+											</div>
+										</label>
+									</div>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+								</div>
+
+								<!-- Conditional Fields -->
+								<div id="urgency-field" class="hidden">
+									<label class="block text-sm font-medium text-gray-700 mb-2">
+										Urgency Level <span class="text-red-500">*</span>
+									</label>
+									<select id="urgency" name="urgency" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+										<option value="">Select urgency level</option>
+										<option value="low">Low - General inquiry</option>
+										<option value="medium">Medium - Would like response within 24-48 hours</option>
+										<option value="high">High - Need response within 24 hours</option>
+										<option value="urgent">Urgent - Need immediate assistance</option>
+									</select>
+								</div>
+
+								<div id="experience-field" class="hidden">
+									<label class="block text-sm font-medium text-gray-700 mb-2">
+										Previous Experience with Psychedelics
+									</label>
+									<select id="experience" name="experience" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+										<option value="">Select your experience level</option>
+										<option value="none">No previous experience</option>
+										<option value="minimal">Minimal experience (1-2 times)</option>
+										<option value="moderate">Moderate experience (several times)</option>
+										<option value="extensive">Extensive experience</option>
+									</select>
+								</div>
+
+								<div id="timeline-field" class="hidden">
+									<label class="block text-sm font-medium text-gray-700 mb-2">
+										Preferred Timeline
+									</label>
+									<select id="timeline" name="timeline" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
+										<option value="">Select preferred timeline</option>
+										<option value="immediate">Within 2 weeks</option>
+										<option value="soon">Within 1 month</option>
+										<option value="flexible">Within 2-3 months</option>
+										<option value="planning">Just planning ahead</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Step 3: Message & Preferences -->
+					<div class="form-step" data-step="3">
+						<div class="bg-purple-50 rounded-lg p-8">
+							<h3 class="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+								<div class="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+									<span class="text-purple-600 font-semibold">3</span>
+								</div>
+								Your Message & Preferences
+							</h3>
+
+							<div class="space-y-6">
+								<div>
+									<label for="message" class="block text-sm font-medium text-gray-700 mb-2">
+										Message <span class="text-red-500">*</span>
+									</label>
+									<textarea 
+										id="message" 
+										name="message" 
+										rows="6" 
+										required 
+										class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+										placeholder="Please describe your inquiry, questions, or how we can help you..."
+									></textarea>
+									<div class="error-message text-red-500 text-sm mt-1 hidden"></div>
+									<div class="text-sm text-gray-500 mt-1">
+										<span id="char-count">0</span>/1000 characters
+									</div>
+								</div>
+
+								<div>
+									<label class="block text-sm font-medium text-gray-700 mb-4">
+										Preferred Contact Method
+									</label>
+									<div class="space-y-2">
+										<label class="flex items-center">
+											<input type="radio" name="contact_method" value="email" class="mr-3" checked>
+											<span class="text-gray-700">Email (default)</span>
+										</label>
+										<label class="flex items-center">
+											<input type="radio" name="contact_method" value="phone" class="mr-3">
+											<span class="text-gray-700">Phone/Text</span>
+										</label>
+										<label class="flex items-center">
+											<input type="radio" name="contact_method" value="both" class="mr-3">
+											<span class="text-gray-700">Either email or phone/text</span>
+										</label>
+									</div>
+								</div>
+
+								<div class="border-t pt-6">
+									<div class="space-y-4">
+										<label class="flex items-start">
+											<input type="checkbox" name="newsletter" value="yes" class="mt-1 mr-3">
+											<div>
+												<span class="text-gray-700">Subscribe to our newsletter</span>
+												<p class="text-sm text-gray-500">Receive updates on psychedelic journey research, resources, and insights</p>
+											</div>
+										</label>
+
+										<label class="flex items-start">
+											<input type="checkbox" name="privacy_consent" value="yes" required class="mt-1 mr-3">
+											<div>
+												<span class="text-gray-700">I consent to receiving phone/text communications from your staff. <span class="text-red-500">*</span></span>
+												<p class="text-sm text-gray-500">
+													By submitting this form, you agree to our 
+													<a href="/privacy" class="text-purple-600 hover:text-purple-800 underline">Privacy Policy</a> 
+													and consent to us contacting you about your inquiry.
+												</p>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Navigation Buttons -->
+					<div class="flex justify-between pt-8">
+						<button type="button" id="form-prev-btn" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-3 px-6 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center" disabled>
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+							</svg>
+							Previous
+						</button>
+						<button type="button" id="form-next-btn" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 flex items-center">
+							Next
+							<svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+							</svg>
+						</button>
+						<button type="submit" id="form-submit-btn" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 hidden flex items-center">
+							<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+							</svg>
+							Send Message
+						</button>
+					</div>
+
+					<!-- Loading State -->
+					<div id="form-loading" class="hidden text-center py-8">
+						<div class="inline-flex items-center">
+							<svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-purple-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+							Sending your message...
+						</div>
+					</div>
+				</form>
+
+				<!-- Success Message -->
+				<div id="form-success" class="hidden bg-green-50 border border-green-200 rounded-lg p-8 text-center">
+					<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+						<svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+						</svg>
+					</div>
+					<h3 class="text-2xl font-bold text-green-900 mb-4">Message Sent Successfully!</h3>
+					<p class="text-green-700 mb-6">
+						Thank you for reaching out. We've received your message and will respond within 24-48 hours.
+					</p>
+					<div id="personalized-response" class="bg-white rounded-lg p-4 mb-6">
+						<!-- Personalized response will be inserted here -->
+					</div>
+					<div class="space-x-4">
+						<a href="/resources" class="bg-green-600 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 inline-block">
+							Explore Resources
+						</a>
+						<a href="/readiness-assessment" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 inline-block">
+							Take Assessment
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Emergency Support Notice -->
+	<section class="py-8 bg-red-50 border-t border-red-200">
+		<div class="container mx-auto px-4">
+			<div class="max-w-4xl mx-auto text-center">
+				<h3 class="text-lg font-semibold text-red-900 mb-2">Crisis Support</h3>
+				<p class="text-red-700 mb-4">
+					If you're experiencing a mental health crisis, please contact emergency services or a crisis hotline immediately.
+				</p>
+				<div class="flex flex-wrap justify-center gap-4 text-sm">
+					<span class="text-red-600">Emergency: 911</span>
+					<span class="text-red-600">Crisis Text Line: Text HOME to 741741</span>
+					<span class="text-red-600">National Suicide Prevention Lifeline: 988</span>
+				</div>
+			</div>
+		</div>
+	</section>
+</BaseLayout>
+
+<style>
+	.form-step {
+		display: none;
+	}
+	
+	.form-step.active {
+		display: block;
+	}
+	
+	.error-message {
+		font-size: 0.875rem;
+		margin-top: 0.25rem;
+	}
+	
+	.field-error {
+		border-color: #ef4444;
+		background-color: #fef2f2;
+	}
+	
+	.field-error:focus {
+		ring-color: #ef4444;
+	}
+</style>
+
+<script>
+	import { security } from '../lib/security.js';
+
+	document.addEventListener('DOMContentLoaded', function() {
+		let currentStep = 1;
+		const totalSteps = 3;
+		
+		const form = document.getElementById('advanced-contact-form') as HTMLFormElement;
+		const prevBtn = document.getElementById('form-prev-btn') as HTMLButtonElement;
+		const nextBtn = document.getElementById('form-next-btn') as HTMLButtonElement;
+		const submitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement;
+		const progressBar = document.getElementById('form-progress-bar') as HTMLElement;
+		const progressText = document.getElementById('form-progress-text') as HTMLElement;
+		const loadingDiv = document.getElementById('form-loading') as HTMLElement;
+		const successDiv = document.getElementById('form-success') as HTMLElement;
+		const messageTextarea = document.getElementById('message') as HTMLTextAreaElement;
+		const charCount = document.getElementById('char-count') as HTMLElement;
+
+		// Initialize security
+		security.secureForm(form);
+
+		// Initialize
+		generateCSRFToken();
+		updateFormProgress();
+		setupConditionalFields();
+		setupCharacterCount();
+
+		// Navigation
+		prevBtn?.addEventListener('click', () => {
+			if (currentStep > 1) {
+				currentStep--;
+				showFormStep(currentStep);
+				updateFormProgress();
+			}
+		});
+
+		nextBtn?.addEventListener('click', () => {
+			if (validateCurrentStep() && currentStep < totalSteps) {
+				currentStep++;
+				showFormStep(currentStep);
+				updateFormProgress();
+			}
+		});
+
+		// Form submission
+		form?.addEventListener('submit', async function(e) {
+			e.preventDefault();
+			
+			if (!validateCurrentStep()) return;
+			
+			showLoading(true);
+			
+			try {
+				const formData = new FormData(form);
+				const response = await submitForm(formData);
+				
+				if (response.success) {
+					showSuccess(response);
+				} else {
+					showError(response.message || 'An error occurred. Please try again.');
+				}
+			} catch (error) {
+				console.error('Form submission error:', error);
+				showError('Network error. Please check your connection and try again.');
+			} finally {
+				showLoading(false);
+			}
+		});
+
+		function generateCSRFToken() {
+			const token = security.generateCSRFToken();
+			const csrfInput = document.getElementById('csrf_token') as HTMLInputElement;
+			if (csrfInput) {
+				csrfInput.value = token;
+			}
+		}
+
+		function setupCharacterCount() {
+			messageTextarea?.addEventListener('input', () => {
+				const length = messageTextarea.value.length;
+				if (charCount) {
+					charCount.textContent = length.toString();
+				}
+				
+				// Update styling based on character count
+				if (length > 1000) {
+					messageTextarea.classList.add('field-error');
+				} else {
+					messageTextarea.classList.remove('field-error');
+				}
+			});
+		}
+
+		function showFormStep(step: number) {
+			document.querySelectorAll('.form-step').forEach(stepEl => {
+				stepEl.classList.remove('active');
+			});
+			
+			const currentStepEl = document.querySelector(`[data-step="${step}"]`);
+			if (currentStepEl) {
+				currentStepEl.classList.add('active');
+			}
+
+			// Update button visibility
+			if (prevBtn) (prevBtn as any).disabled = step === 1;
+			
+			if (step === totalSteps) {
+				nextBtn?.classList.add('hidden');
+				submitBtn?.classList.remove('hidden');
+			} else {
+				nextBtn?.classList.remove('hidden');
+				submitBtn?.classList.add('hidden');
+			}
+		}
+
+		function updateFormProgress() {
+			const percentage = (currentStep / totalSteps) * 100;
+			if (progressBar) progressBar.style.width = `${percentage}%`;
+			if (progressText) progressText.textContent = `Step ${currentStep} of ${totalSteps}`;
+		}
+
+		function validateCurrentStep(): boolean {
+			const currentStepEl = document.querySelector(`[data-step="${currentStep}"]`);
+			const requiredFields = currentStepEl?.querySelectorAll('[required]');
+			let isValid = true;
+
+			// Clear previous errors
+			currentStepEl?.querySelectorAll('.error-message').forEach(error => {
+				error.classList.add('hidden');
+				(error as HTMLElement).textContent = '';
+			});
+			currentStepEl?.querySelectorAll('.field-error').forEach(field => {
+				field.classList.remove('field-error');
+			});
+
+			requiredFields?.forEach(field => {
+				if (!validateField(field as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement)) {
+					isValid = false;
+				}
+			});
+
+			return isValid;
+		}
+
+		function validateField(field: HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement): boolean {
+			const value = field.value.trim();
+			const fieldType = (field as HTMLInputElement).type || field.tagName.toLowerCase();
+			const fieldName = field.name;
+			let isValid = true;
+			let errorMessage = '';
+
+			// Required field validation
+			if (field.hasAttribute('required')) {
+				if (fieldType === 'radio') {
+					const radioGroup = document.querySelectorAll(`[name="${fieldName}"]`);
+					const hasSelection = Array.from(radioGroup).some(radio => (radio as HTMLInputElement).checked);
+					if (!hasSelection) {
+						isValid = false;
+						errorMessage = 'Please select an option.';
+					}
+				} else if (fieldType === 'checkbox' && fieldName === 'privacy_consent') {
+					if (!(field as HTMLInputElement).checked) {
+						isValid = false;
+						errorMessage = 'You must consent to data processing to continue.';
+					}
+				} else if (!value) {
+					isValid = false;
+					errorMessage = 'This field is required.';
+				}
+			}
+
+			// Email validation
+			if (fieldType === 'email' && value) {
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (!emailRegex.test(value)) {
+					isValid = false;
+					errorMessage = 'Please enter a valid email address.';
+				}
+			}
+
+			// Phone validation
+			if (fieldType === 'tel' && value) {
+				const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+				const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
+				if (!phoneRegex.test(cleanPhone)) {
+					isValid = false;
+					errorMessage = 'Please enter a valid phone number.';
+				}
+			}
+
+			// Message length validation
+			if (fieldName === 'message' && value) {
+				if (value.length > 1000) {
+					isValid = false;
+					errorMessage = 'Message must be 1000 characters or less.';
+				}
+			}
+
+			// Show error if validation failed
+			if (!isValid) {
+				showFieldError(field, errorMessage);
+			}
+
+			return isValid;
+		}
+
+		function showFieldError(field: HTMLElement, message: string) {
+			field.classList.add('field-error');
+			const errorDiv = field.parentNode?.querySelector('.error-message') as HTMLElement;
+			if (errorDiv) {
+				errorDiv.textContent = message;
+				errorDiv.classList.remove('hidden');
+			}
+		}
+
+		function setupConditionalFields() {
+			const inquiryTypeInputs = document.querySelectorAll('[name="inquiry_type"]') as NodeListOf<HTMLInputElement>;
+			const urgencyField = document.getElementById('urgency-field') as HTMLElement;
+			const experienceField = document.getElementById('experience-field') as HTMLElement;
+			const timelineField = document.getElementById('timeline-field') as HTMLElement;
+
+			inquiryTypeInputs.forEach(input => {
+				input.addEventListener('change', () => {
+					const value = input.value;
+					
+					// Hide all conditional fields first
+					urgencyField?.classList.add('hidden');
+					experienceField?.classList.add('hidden');
+					timelineField?.classList.add('hidden');
+					
+					// Show relevant fields based on selection
+					switch (value) {
+						case 'consultation':
+						case 'services':
+							experienceField?.classList.remove('hidden');
+							timelineField?.classList.remove('hidden');
+							break;
+						case 'emergency':
+							urgencyField?.classList.remove('hidden');
+							break;
+						case 'support':
+							experienceField?.classList.remove('hidden');
+							break;
+					}
+				});
+			});
+		}
+
+		function showLoading(show: boolean) {
+			if (show) {
+				form?.classList.add('hidden');
+				loadingDiv?.classList.remove('hidden');
+			} else {
+				form?.classList.remove('hidden');
+				loadingDiv?.classList.add('hidden');
+			}
+		}
+
+		function showSuccess(response: any) {
+			// Check if this is a consultation request
+			const inquiryType = new FormData(form).get('inquiry_type');
+			
+						if (inquiryType === 'consultation') {
+				// Redirect to scheduling page with form data
+				const formData = new FormData(form);
+				const params = new URLSearchParams();
+				
+				// Only pass the necessary fields for the consultation form
+				const firstName = formData.get('first_name')?.toString() || '';
+				const lastName = formData.get('last_name')?.toString() || '';
+				params.append('name', `${firstName} ${lastName}`.trim());
+				params.append('email', formData.get('email')?.toString() || '');
+				params.append('phone', formData.get('phone')?.toString() || '');
+				params.append('message', formData.get('message')?.toString() || '');
+				
+				window.location.href = `/schedule-consultation?${params.toString()}`;
+			} else {
+				// Show standard success message for other inquiries
+				form?.classList.add('hidden');
+				loadingDiv?.classList.add('hidden');
+				successDiv?.classList.remove('hidden');
+				
+				// Generate personalized response
+				const personalizedResponse = generatePersonalizedResponse(response);
+				const responseDiv = document.getElementById('personalized-response');
+				if (responseDiv) {
+					responseDiv.innerHTML = personalizedResponse;
+				}
+			}
+		}
+
+		function showError(message: string) {
+			// Create error notification
+			const errorDiv = document.createElement('div');
+			errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4';
+			errorDiv.innerHTML = `
+				<div class="flex items-center">
+					<svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+						<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+					</svg>
+					<span>${message}</span>
+					<button onclick="this.parentElement.parentElement.remove()" class="ml-auto text-red-800 hover:text-red-900">×</button>
+				</div>
+			`;
+			
+			form?.insertBefore(errorDiv, form.firstChild);
+		}
+
+		async function submitForm(formData: FormData): Promise<any> {
+			// Convert FormData to a plain object and separate webhook_url
+			const { webhook_url, ...forwardData } = Object.fromEntries(formData.entries());
+			console.log("Submitting form data:", JSON.stringify(forwardData, null, 2));
+
+			try {
+				const response = await fetch(webhook_url as string, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(forwardData),
+				});
+
+				if (!response.ok) {
+					const errorData = await response.json().catch(() => ({ message: 'An unknown error occurred.' }));
+					console.error('Server response not OK:', response.status, errorData);
+					throw new Error(errorData.error || `Request failed with status ${response.status}`);
+				}
+
+				const result = await response.json();
+				console.log("Received response from submission endpoint:", JSON.stringify(result, null, 2));
+				
+		              // The backend response just gives {success: true}, so we add the other fields for the frontend.
+				return {
+					...result, // Should be { success: true }
+					inquiryType: formData.get('inquiry_type'),
+					firstName: formData.get('first_name'),
+				};
+
+			} catch (error) {
+				console.error('Error submitting form:', error);
+				// The showError function is already called in the submit handler's catch block
+				throw error;
+			}
+		}
+
+		function generatePersonalizedResponse(response: any): string {
+			const inquiryType = response.inquiryType;
+			const firstName = response.firstName;
+			
+			let personalizedMessage = '';
+			let nextSteps = '';
+			
+			switch (inquiryType) {
+				case 'consultation':
+					personalizedMessage = `Hi ${firstName}, thank you for your interest in scheduling a consultation. We're excited to discuss your journey and how we can support you.`;
+					nextSteps = `
+						<h4 class="font-semibold text-gray-900 mb-2">Next Steps:</h4>
+						<ul class="text-sm text-gray-700 space-y-1">
+							<li>• We'll review your information and match you with an appropriate facilitator</li>
+							<li>• You'll receive a scheduling link within 24 hours</li>
+							<li>• Consider taking our readiness assessment before your consultation</li>
+						</ul>
+					`;
+					break;
+				case 'assessment':
+					personalizedMessage = `Hi ${firstName}, great question about our readiness assessment! This is an important step in your psychedelic therapy journey.`;
+					nextSteps = `
+						<h4 class="font-semibold text-gray-900 mb-2">Recommended Actions:</h4>
+						<ul class="text-sm text-gray-700 space-y-1">
+							<li>• Take our enhanced readiness assessment</li>
+							<li>• Review the preparation resources</li>
+							<li>• Schedule a consultation to discuss your results</li>
+						</ul>
+					`;
+					break;
+				case 'services':
+					personalizedMessage = `Hi ${firstName}, thank you for your interest in learning more about our services. We offer comprehensive support throughout your psychedelic therapy journey.`;
+					nextSteps = `
+						<h4 class="font-semibold text-gray-900 mb-2">Service Information:</h4>
+						<ul class="text-sm text-gray-700 space-y-1">
+							<li>• Detailed service information will be sent to your email</li>
+							<li>• Consider scheduling a consultation to discuss your specific needs</li>
+							<li>• Explore our resources section for more information</li>
+						</ul>
+					`;
+					break;
+				case 'support':
+					personalizedMessage = `Hi ${firstName}, we're here to support you through your integration process. Ongoing support is crucial for maximizing the benefits of your psychedelic experience.`;
+					nextSteps = `
+						<h4 class="font-semibold text-gray-900 mb-2">Support Options:</h4>
+						<ul class="text-sm text-gray-700 space-y-1">
+							<li>• We'll connect you with integration specialists</li>
+							<li>• Access to our integration resources and community</li>
+							<li>• Follow-up sessions can be scheduled as needed</li>
+						</ul>
+					`;
+					break;
+				case 'emergency':
+					personalizedMessage = `Hi ${firstName}, If this is a mental health crisis, please contact emergency services immediately. We take your safety very seriously and want to ensure you get the help you need in a timely manner. We are not an emergency resource, but will attempt to follow up with you soon.`;
+					nextSteps = `
+						<h4 class="font-semibold text-red-900 mb-2">Immediate Actions:</h4>
+						<ul class="text-sm text-red-700 space-y-1">
+							<li>• Our crisis support team will contact you within 2 hours</li>
+							<li>• If immediate help is needed, call 911 or 988</li>
+							<li>• Crisis Text Line: Text HOME to 741741</li>
+						</ul>
+					`;
+					break;
+				default:
+					personalizedMessage = `Hi ${firstName}, thank you for reaching out. We appreciate your interest and will respond to your inquiry promptly.`;
+					nextSteps = `
+						<h4 class="font-semibold text-gray-900 mb-2">What's Next:</h4>
+						<ul class="text-sm text-gray-700 space-y-1">
+							<li>• We'll review your message and respond within 24-48 hours</li>
+							<li>• Feel free to explore our resources in the meantime</li>
+							<li>• Consider taking our readiness assessment</li>
+						</ul>
+					`;
+			}
+			
+			return `
+				<div class="text-left">
+					<p class="text-gray-800 mb-4">${personalizedMessage}</p>
+					${nextSteps}
+				</div>
+			`;
+		}
+	});
+
+	function closeSuccessModal() {
+		const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+		if (modal) {
+			modal.remove();
+		}
+		window.location.replace('/readiness-assessment');
+	}
+	
+	function closeErrorModal() {
+		const modal = document.querySelector('.fixed.inset-0.bg-black.bg-opacity-50');
+		if (modal) {
+			modal.remove();
+		}
+		window.location.replace('/readiness-assessment');
+	}
+	
+	// Add real-time validation
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('consultation-form');
+		if (!form) return;
+		
+		// Add input event listeners for real-time validation
+		const inputs = form.querySelectorAll('input, select, textarea');
+		inputs.forEach(input => {
+			input.addEventListener('blur', function() {
+				validateSingleField(this);
+			});
+			
+			input.addEventListener('input', function() {
+				// Clear error when user starts typing
+				const errorId = this.id + '-error';
+				const errorElement = document.getElementById(errorId);
+				if (errorElement && !errorElement.classList.contains('hidden')) {
+					errorElement.classList.add('hidden');
+					this.classList.remove('border-red-500');
+					this.classList.add('border-gray-300');
+				}
+			});
+		});
+		
+		// Age selection warning
+		const ageSelect = document.getElementById('age') as HTMLSelectElement;
+		if (ageSelect) {
+			ageSelect.addEventListener('change', function() {
+				if (this.value === '18-20') {
+					showError('age-error', 'You must be 21 or older to be eligible for our services');
+				}
+			});
+		}
+	});
+	
+	function validateSingleField(field: HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement) {
+		const fieldName = field.name;
+		const value = field.value.trim();
+		const errorId = field.id + '-error';
+		
+		// Clear previous error
+		const errorElement = document.getElementById(errorId);
+		if (errorElement) {
+			errorElement.classList.add('hidden');
+		}
+		field.classList.remove('border-red-500');
+		field.classList.add('border-gray-300');
+		
+		// Validate based on field type
+		switch (fieldName) {
+			case 'name':
+				if (value.length < 2) {
+					showError(errorId, 'Name must be at least 2 characters');
+				}
+				break;
+			case 'email':
+				const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				if (value && !emailRegex.test(value)) {
+					showError(errorId, 'Please enter a valid email address');
+				}
+				break;
+			case 'phone':
+				if (value) {
+					const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+					const cleanPhone = value.replace(/[\s\-\(\)]/g, '');
+					if (!phoneRegex.test(cleanPhone) || cleanPhone.length < 10) {
+						showError(errorId, 'Please enter a valid phone number');
+					}
+				}
+				break;
+		}
+	}
+	
+	// Make functions available globally
+	(window as any).handleConsultationBooking = handleConsultationBooking;
+	(window as any).closeSuccessModal = closeSuccessModal;
+	(window as any).closeErrorModal = closeErrorModal;
+</script>
+</script>

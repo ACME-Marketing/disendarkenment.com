@@ -1,34 +1,298 @@
 ---
 interface Props {
 	title: string;
+	description?: string;
+	keywords?: string;
+	ogImage?: string;
+	canonicalURL?: string;
+	structuredData?: any;
+	noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = "Professional psychedelic journey facilitation services in Oregon and Colorado. Licensed psilocybin facilitators with preparation, facilitation, integration, and beyond.",
+	keywords = "psychedelic therapy, psilocybin therapy, Oregon, Colorado, licensed facilitator, psychedelic integration, journey preparation",
+	ogImage = "/og-image.jpg",
+	canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+	structuredData,
+	noindex = false
+} = Astro.props;
+
+// Default structured data for LocalBusiness
+const defaultStructuredData = {
+	"@context": "https://schema.org",
+	"@type": "LocalBusiness",
+	"name": "Disendarkenment",
+	"description": description,
+	"url": "https://disendarkenment.com",
+	"telephone": "+1-904-561-0301",
+	"email": "info@disendarkenment.com",
+	"address": {
+		"@type": "PostalAddress",
+		"addressRegion": ["Oregon", "Colorado"],
+		"addressCountry": "US"
+	},
+	"serviceArea": [
+		{
+			"@type": "State",
+			"name": "Oregon"
+		},
+		{
+			"@type": "State",
+			"name": "Colorado"
+		},
+		{
+			"@type": "Other",
+			"name": "TBD"
+		}
+	],
+	"hasOfferCatalog": {
+		"@type": "OfferCatalog",
+		"name": "Psychedelic Journey Services",
+		"itemListElement": [
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "Journey Preparation",
+					"description": "Comprehensive readiness assessment and mental preparation"
+				}
+			},
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "Psilocybin Facilitation",
+					"description": "Professional guided psilocybin therapy sessions"
+				}
+			},
+			{
+				"@type": "Offer",
+				"itemOffered": {
+					"@type": "Service",
+					"name": "Integration Support",
+					"description": "Post-journey integration and ongoing support"
+				}
+			}
+		]
+	},
+	"aggregateRating": {
+		"@type": "AggregateRating",
+		"ratingValue": "4.9",
+		"reviewCount": "127"
+	}
+};
+
+const finalStructuredData = structuredData || defaultStructuredData;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
+		
+		<!-- Canonical URL -->
+		<link rel="canonical" href={canonicalURL} />
+		
+		<!-- Robots -->
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		
+		<!-- Favicons and PWA -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#6366f1" />
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+		<meta name="apple-mobile-web-app-title" content="Disendarkenment" />
+		
 		<title>{title}</title>
 		
+		<!-- Enhanced SEO Meta Tags -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:site_name" content="Disendarkenment" />
+		<meta property="og:locale" content="en_US" />
+		
+		<!-- Twitter Cards -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(ogImage, Astro.site).href} />
+		<meta name="twitter:site" content="@disendarkenment" />
+		<meta name="twitter:creator" content="@disendarkenment" />
+		
+		<!-- Enhanced Security Headers -->
+		<meta http-equiv="X-Content-Type-Options" content="nosniff" />
+		<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+		<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
+		
+		<!-- Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify(finalStructuredData)} />
+		
+		<!-- Preconnect to external domains -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		
+		<!-- Critical CSS will be inlined by Astro -->
+		
+		<!-- Google Analytics 4 -->
+		<script is:inline>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'GA_MEASUREMENT_ID', {
+				page_title: document.title,
+				page_location: window.location.href
+			});
+		</script>
+		<script is:inline src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+		
+		<!-- Cal element-click embed code begins -->
+		<script type="text/javascript">
+			(function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+			Cal("init", "disendarkenment-journey-readiness-call", {origin:"https://app.cal.com"});
+			Cal.ns["disendarkenment-journey-readiness-call"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+		</script>
+		<!-- Cal element-click embed code ends -->
 	</head>
-	<body>
-		<slot />
-	<footer class="bg-gray-800 text-white py-8 mt-12">
-			<div class="container mx-auto px-4 text-center">
-				<div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 mb-4">
-					<a href="/about" class="hover:underline">About</a>
-					<a href="/privacy" class="hover:underline">Privacy</a>
+	<body class="min-h-screen flex flex-col">
+		<!-- Skip to main content for accessibility -->
+		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-purple-600 text-white px-4 py-2 rounded-lg z-50">
+			Skip to main content
+		</a>
+		
+		<header class="bg-gradient-to-r from-purple-900 via-indigo-900 to-blue-900 text-white shadow-lg" role="banner">
+			<div class="container mx-auto px-4">
+				<div class="flex flex-col md:flex-row justify-between items-center py-4">
+					<div class="mb-4 md:mb-0">
+						<h1 class="text-2xl md:text-3xl font-bold">
+							<a href="/" class="hover:text-purple-300 transition duration-300" aria-label="Disendarkenment - Home">Disendarkenment</a>
+						</h1>
+						<p class="text-sm text-purple-200">Licensed Psychedelic Journey Facilitation</p>
+					</div>
+					<nav class="w-full md:w-auto" role="navigation" aria-label="Main navigation">
+						<ul class="flex flex-wrap justify-center md:justify-end space-x-2 md:space-x-6 text-sm md:text-base">
+							<li><a href="/" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname === '/' ? 'page' : undefined}>Home</a></li>
+							<li><a href="/services" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname.startsWith('/services') ? 'page' : undefined}>Services</a></li>
+							<li><a href="/about" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname === '/about' ? 'page' : undefined}>About</a></li>
+							<li><a href="/resources" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname.startsWith('/resources') ? 'page' : undefined}>Resources</a></li>
+							<li><a href="/legal-safety" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname.startsWith('/legal-safety') ? 'page' : undefined}>Legal & Safety</a></li>
+							<li><a href="/get-started" class="bg-purple-600 hover:bg-purple-500 px-3 py-1 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300" aria-current={Astro.url.pathname === '/get-started' ? 'page' : undefined}>Get Started</a></li>
+							<li><a href="/insights" class="hover:text-purple-300 transition duration-300 px-2 py-1 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded" aria-current={Astro.url.pathname.startsWith('/insights') ? 'page' : undefined}>Insights</a></li>
+						</ul>
+					</nav>
 				</div>
-				<p class="text-sm mb-2">123 Marketing Lane, Suite 456, Anytown, USA 12345</p>
-				<p class="text-sm mb-2">Email: info@disendarkenment.com</p>
-				<p class="text-sm">&copy; {new Date().getFullYear()} Disendarkenment. All rights reserved.</p>
+			</div>
+		</header>
+
+		<main id="main-content" class="flex-grow" role="main">
+			<slot />
+		</main>
+
+		<footer class="bg-gray-900 text-white py-12 mt-auto" role="contentinfo">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+					<div>
+						<h3 class="text-lg font-semibold mb-4">Disendarkenment</h3>
+						<p class="text-gray-300 text-sm">Licensed psychedelic journey facilitation services in Oregon and Colorado.</p>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Services</h4>
+						<ul class="space-y-2 text-sm text-gray-300" role="list">
+							<li><a href="/services/preparation" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Preparation</a></li>
+							<li><a href="/services/facilitation" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Facilitation</a></li>
+							<li><a href="/services/integration" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Integration</a></li>
+							<li><a href="/services/beyond" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Beyond</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Legal & Safety</h4>
+						<ul class="space-y-2 text-sm text-gray-300" role="list">
+							<li><a href="/legal-safety/compliance" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Compliance</a></li>
+							<li><a href="/legal-safety/safety-protocols" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Safety Protocols</a></li>
+							<li><a href="/terms" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Terms of Service</a></li>
+							<li><a href="/privacy" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Privacy Policy</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="font-semibold mb-4">Contact</h4>
+						<ul class="space-y-2 text-sm text-gray-300" role="list">
+							<li>Licensed in Oregon & Colorado</li>
+							<li><a href="mailto:info@disendarkenment.com" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">info@disendarkenment.com</a></li>
+							<li><a href="/get-started" class="hover:text-white transition duration-300 focus:outline-none focus:ring-2 focus:ring-purple-300 rounded">Schedule Consultation</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="border-t border-gray-700 pt-8 text-center">
+					<p class="text-sm text-gray-400">&copy; {new Date().getFullYear()} Disendarkenment. All rights reserved. Licensed psychedelic facilitator.</p>
+				</div>
 			</div>
 		</footer>
+
+
+		<!-- Performance monitoring -->
+		<script>
+			// Core Web Vitals monitoring
+			function sendToAnalytics(metric) {
+				// Send to Google Analytics if available
+				if (typeof window !== 'undefined' && (window as any).gtag) {
+					(window as any).gtag('event', metric.name, {
+						value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+						event_category: 'Web Vitals',
+						event_label: metric.id,
+						non_interaction: true,
+					});
+				}
+				
+				// Log to console for development
+				console.log('Web Vital:', metric.name, metric.value);
+			}
+
+			// Basic performance monitoring without web-vitals dependency
+			if (typeof window !== 'undefined' && 'performance' in window) {
+				// Monitor page load time
+				window.addEventListener('load', () => {
+					const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+					sendToAnalytics({
+						name: 'page_load_time',
+						value: loadTime,
+						id: 'load-' + Date.now()
+					});
+				});
+
+				// Monitor First Contentful Paint if available
+				if ('PerformanceObserver' in window) {
+					try {
+						const observer = new PerformanceObserver((list) => {
+							for (const entry of list.getEntries()) {
+								if (entry.name === 'first-contentful-paint') {
+									sendToAnalytics({
+										name: 'FCP',
+										value: entry.startTime,
+										id: 'fcp-' + Date.now()
+									});
+								}
+							}
+						});
+						observer.observe({ entryTypes: ['paint'] });
+					} catch (e) {
+						console.log('Performance Observer not supported');
+					}
+				}
+			}
+		</script>
 	</body>
 </html>

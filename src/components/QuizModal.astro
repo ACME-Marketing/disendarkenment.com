@@ -1,0 +1,99 @@
+---
+---
+
+<div class="quiz-modal-container">
+  <!-- Modal Overlay -->
+  <div 
+    class="quiz-modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4"
+    data-quiz-overlay
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="quiz-title"
+  >
+    <div class="quiz-modal bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="quiz-header bg-gradient-to-r from-purple-600 to-indigo-600 text-white p-6">
+        <div class="flex justify-between items-center">
+          <h2 id="quiz-title" class="text-2xl font-bold">Psychedelic Therapy Readiness Quiz</h2>
+          <button 
+            class="quiz-close text-white hover:text-gray-200 text-2xl font-bold"
+            data-quiz-close
+            aria-label="Close quiz"
+          >
+            ×
+          </button>
+        </div>
+        <div class="mt-4">
+          <div class="quiz-progress bg-white bg-opacity-20 rounded-full h-2">
+            <div 
+              class="quiz-progress-bar bg-white h-2 rounded-full transition-all duration-300"
+              data-quiz-progress
+              style="width: 0%"
+            ></div>
+          </div>
+          <p class="text-sm mt-2" data-quiz-counter>Question 1 of 10</p>
+        </div>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="quiz-content p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <!-- Questions will be dynamically loaded here -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="quiz-footer p-6 border-t border-gray-200">
+        <div class="flex justify-between">
+          <button 
+            class="quiz-prev bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            data-quiz-prev
+            disabled
+          >
+            Previous
+          </button>
+          <button 
+            class="quiz-next bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            data-quiz-next
+            disabled
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .quiz-modal-overlay {
+    backdrop-filter: blur(4px);
+  }
+  
+  .quiz-modal {
+    animation: modalSlideIn 0.3s ease-out;
+  }
+  
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .quiz-option {
+    transition: all 0.2s ease;
+  }
+  
+  .quiz-option:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .quiz-option.selected {
+    border-color: #7c3aed;
+    background-color: #f3e8ff;
+  }
+</style>

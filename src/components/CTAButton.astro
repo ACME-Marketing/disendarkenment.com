@@ -1,0 +1,42 @@
+---
+export interface Props {
+  text?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  className?: string;
+  quizId?: string;
+}
+
+const { 
+  text = 'Take the Readiness Quiz', 
+  variant = 'primary', 
+  size = 'md', 
+  className = '',
+  quizId = 'default-quiz'
+} = Astro.props;
+
+const baseClasses = 'font-semibold rounded-lg transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
+
+const variants = {
+  primary: 'bg-purple-600 hover:bg-purple-500 text-white focus:ring-purple-500',
+  secondary: 'bg-green-600 hover:bg-green-500 text-white focus:ring-green-500',
+  outline: 'border-2 border-purple-600 text-purple-600 hover:bg-purple-50 focus:ring-purple-500'
+};
+
+const sizes = {
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-base',
+  lg: 'px-8 py-4 text-lg'
+};
+
+const classes = `${baseClasses} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+<button 
+  class={classes}
+  data-quiz-trigger
+  data-quiz-id={quizId}
+  type="button"
+>
+  {text}
+</button>

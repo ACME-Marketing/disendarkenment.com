@@ -1,0 +1,92 @@
+{
+  "name": "Disendarkenment - Licensed Psychedelic Journey Facilitation",
+  "short_name": "Disendarkenment",
+  "description": "Professional psychedelic journey facilitation services in Oregon, Colorado, and elsewhere. Licensed psilocybin facilitation with preparation, integration, and beyond.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e1b4b",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "categories": ["health", "medical", "wellness"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Get Started",
+      "short_name": "Get Started",
+      "description": "Schedule a consultation",
+      "url": "/get-started",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Readiness Assessment",
+      "short_name": "Assessment",
+      "description": "Take the readiness assessment",
+      "url": "/readiness-assessment",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "View our services",
+      "url": "/services",
+      "icons": [
+        {
+          "src": "/favicon-32x32.png",
+          "sizes": "32x32"
+        }
+      ]
+    }
+  ]
+}

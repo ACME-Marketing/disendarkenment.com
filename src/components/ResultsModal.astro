@@ -1,0 +1,82 @@
+---
+---
+
+<div class="results-modal-container">
+  <!-- Modal Overlay -->
+  <div 
+    class="results-modal-overlay fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center p-4"
+    data-results-overlay
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="results-title"
+  >
+    <div class="results-modal bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="results-header bg-gradient-to-r from-green-600 to-blue-600 text-white p-6">
+        <div class="flex justify-between items-center">
+          <h2 id="results-title" class="text-2xl font-bold">Your Readiness Assessment Results</h2>
+          <button 
+            class="results-close text-white hover:text-gray-200 text-2xl font-bold"
+            data-results-close
+            aria-label="Close results"
+          >
+            ×
+          </button>
+        </div>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="results-content p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+        <!-- Results will be dynamically loaded here -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="results-footer p-6 border-t border-gray-200">
+        <div class="flex justify-between">
+          <button 
+            class="results-back bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-300"
+            data-results-back
+          >
+            Back to Quiz
+          </button>
+          <button 
+            class="results-book bg-green-600 hover:bg-green-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+            data-results-book
+          >
+            Book Consultation
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .results-modal-overlay {
+    backdrop-filter: blur(4px);
+  }
+  
+  .results-modal {
+    animation: modalSlideIn 0.3s ease-out;
+  }
+  
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .recommendation-card {
+    transition: all 0.2s ease;
+  }
+  
+  .recommendation-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+</style>
