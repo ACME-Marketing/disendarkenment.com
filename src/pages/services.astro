@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationModal from '../components/ConsultationModal.astro';
 ---
 
 <BaseLayout title="Services - Disendarkenment" description="Comprehensive psychedelic journey facilitation services including preparation, guided sessions, integration support, and ongoing coaching.">
@@ -57,9 +58,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<p class="text-gray-600 mb-6">
 						Schedule a consultation to discuss your goals and determine the best approach for your journey.
 					</p>
-					<a href="/get-started" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 inline-block">
+					<button onclick="openConsultationModal()" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 inline-block">
 						Schedule Consultation
-					</a>
+					</button>
 				</div>
 			</div>
 
@@ -581,11 +582,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 			<p class="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
 				Take the first step towards transformation with professional, licensed psychedelic journey facilitation.
 			</p>
-			<a href="/get-started" class="bg-white text-purple-900 hover:bg-purple-100 font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block">
+			<button onclick="openConsultationModal()" class="bg-white text-purple-900 hover:bg-purple-100 font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 inline-block">
 				Schedule Your Consultation
-			</a>
+			</button>
 		</div>
 	</section>
+	
+	<!-- Consultation Modal -->
+	<ConsultationModal />
 </BaseLayout>
 
 <script>
