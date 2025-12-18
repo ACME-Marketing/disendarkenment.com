@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
 
 // Since we can't use SSR, we'll handle URL params on the client side
 const formData = {
@@ -85,39 +86,48 @@ const formData = {
 
       <!-- Cal.com Booking Interface -->
       <div class="bg-white rounded-lg shadow-lg p-8">
-        <div class="text-center mb-6">
-          <h3 class="text-2xl font-bold text-gray-900 mb-2">Choose Your Consultation Time</h3>
-          <p class="text-gray-600">Select a convenient time for your confidential consultation call</p>
-        </div>
-        
-        <!-- Cal.com embed container -->
-        <div id="cal-booking-container" class="min-h-[600px] flex items-center justify-center">
-          <button 
-            data-cal-link="takealook/disendarkenment-journey-readiness-call"
-            data-cal-namespace="disendarkenment-journey-readiness-call"
-            data-cal-config='{"layout":"month_view"}'
-            id="cal-booking-button"
-            class="w-full max-w-md bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 transform hover:scale-105 shadow-lg">
-            <div class="flex items-center justify-center">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-              </svg>
-              Open Calendar to Schedule
+        {siteConfig.GoLive ? (
+          <>
+            <div class="text-center mb-6">
+              <h3 class="text-2xl font-bold text-gray-900 mb-2">Choose Your Consultation Time</h3>
+              <p class="text-gray-600">Select a convenient time for your confidential consultation call</p>
             </div>
-          </button>
-        </div>
+            
+            {/* Cal.com embed container */}
+            <div id="cal-booking-container" class="min-h-[600px] flex items-center justify-center">
+              <button 
+                data-cal-link="takealook/disendarkenment-journey-readiness-call"
+                data-cal-namespace="disendarkenment-journey-readiness-call"
+                data-cal-config='{"layout":"month_view"}'
+                id="cal-booking-button"
+                class="w-full max-w-md bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-4 px-8 rounded-lg text-lg transition duration-300 transform hover:scale-105 shadow-lg">
+                <div class="flex items-center justify-center">
+                  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                  </svg>
+                  Open Calendar to Schedule
+                </div>
+              </button>
+            </div>
 
-        <div class="mt-6 text-center">
-          <p class="text-sm text-gray-500 mb-2">
-            Select a time that works for you. You'll receive confirmation details via email.
-          </p>
-          <div class="flex items-center justify-center text-xs text-gray-400">
-            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-            </svg>
-            Secure and confidential scheduling
+            <div class="mt-6 text-center">
+              <p class="text-sm text-gray-500 mb-2">
+                Select a time that works for you. You'll receive confirmation details via email.
+              </p>
+              <div class="flex items-center justify-center text-xs text-gray-400">
+                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+                Secure and confidential scheduling
+              </div>
+            </div>
+          </>
+        ) : (
+          <div class="text-center py-16">
+            <h3 class="text-2xl font-bold text-gray-900 mb-4">We are not accepting new clients at this time.</h3>
+            <p class="text-gray-600">Please check back again later.</p>
           </div>
-        </div>
+        )}
       </div>
 
       <!-- Next Steps -->
