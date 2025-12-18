@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
 
 // Check if coming from consultation booking
 const fromConsultation = Astro.url.searchParams.get('from') === 'consultation';
@@ -46,6 +47,27 @@ const bookingConfirmed = Astro.url.searchParams.get('booked') === 'true';
 	<section class="py-16 bg-white">
 		<div class="container mx-auto px-4">
 			<div class="max-w-4xl mx-auto">
+				{!siteConfig.GoLive ? (
+					<div class="bg-amber-50 border border-amber-200 rounded-lg p-8 text-center">
+						<div class="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
+							<svg class="w-8 h-8 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+							</svg>
+						</div>
+						<h3 class="text-2xl font-bold text-amber-900 mb-4">Assessment Currently Unavailable</h3>
+						<p class="text-amber-700 mb-6">
+							We are not currently accepting new assessments. Please check back soon or explore our resources in the meantime.
+						</p>
+						<div class="space-x-4">
+							<a href="/resources" class="bg-amber-600 hover:bg-amber-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 inline-block">
+								Explore Resources
+							</a>
+							<a href="/" class="bg-gray-600 hover:bg-gray-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 inline-block">
+								Return Home
+							</a>
+						</div>
+					</div>
+				) : (
 				<form id="readiness-form" class="space-y-12">
 					<!-- Section 1: Mental Health & Stability -->
 					<div class="bg-blue-50 rounded-lg p-8">
@@ -497,6 +519,7 @@ const bookingConfirmed = Astro.url.searchParams.get('booked') === 'true';
 						</button>
 					</div>
 				</form>
+				)}
 			</div>
 		</div>
 	</section>
