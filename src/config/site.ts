@@ -1,3 +1,3 @@
 export const siteConfig = {
-  GoLive: true
+  GoLive: false
 };
