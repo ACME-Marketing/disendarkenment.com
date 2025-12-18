@@ -1,6 +1,7 @@
 ---
 export const prerender = true;
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteConfig } from '../config/site';
 
 const structuredData = {
 	"@context": "https://schema.org",
@@ -164,13 +165,15 @@ const structuredData = {
 										What type of inquiry is this? <span class="text-red-500">*</span>
 									</label>
 									<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
-											<input type="radio" name="inquiry_type" value="consultation" class="mt-1 mr-3" required>
-											<div>
-												<span class="font-medium text-gray-900">Initial Consultation</span>
-												<p class="text-sm text-gray-600">Schedule a consultation to discuss your needs</p>
-											</div>
-										</label>
+										{siteConfig.GoLive && (
+											<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
+												<input type="radio" name="inquiry_type" value="consultation" class="mt-1 mr-3" required>
+												<div>
+													<span class="font-medium text-gray-900">Initial Consultation</span>
+													<p class="text-sm text-gray-600">Schedule a consultation to discuss your needs</p>
+												</div>
+											</label>
+										)}
 										<label class="flex items-start p-4 border border-gray-200 rounded-lg hover:bg-gray-50 cursor-pointer transition duration-200">
 											<input type="radio" name="inquiry_type" value="assessment" class="mt-1 mr-3" required>
 											<div>
