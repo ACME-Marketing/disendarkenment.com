@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Astro 5 static marketing website for a psychedelic therapy facilitation service (licensed psilocybin therapy in Oregon and Colorado). Deployed on Netlify.
+Astro 5 static marketing website for a psychedelic therapy facilitation service (licensed psilocybin therapy in Oregon and Colorado). Deployed on Render.com.
 
 ## Commands
 
